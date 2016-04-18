@@ -5,7 +5,6 @@ exports.up = function(knex, Promise) {
     table.text('first');
     table.text('gender').notNullable();
     table.integer('age');
-    table.text('patientId').notNullable();
     table.text('pcp');
     table.text('planType');
     table.date('enrollment').notNullable();
