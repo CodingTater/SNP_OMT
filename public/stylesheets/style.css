@@ -1,8 +1,211 @@
 body {
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background: #202020;
+  font-family:"Open Sans", sans-serif;
+  width: 100%;
+  height: 100vh;
 }
 
 a {
   color: #00B7FF;
+}
+
+header{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  color: white;
+  text-shadow: 4px 4px 4px black;
+  width: 100%;
+  height: 15%;
+}
+
+.logo {
+  width: 50%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.nav {
+  display: flex;
+  width: 50%;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.nav a {
+  text-decoration: none;
+  color: #6D6DDD;
+  text-shadow: none;
+}
+
+.nav a:hover {
+  color: #2626A0;
+}
+
+.mainContainer{
+  height: 90%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;;
+  align-items: center;
+  background-image: url('../../images/login_background1.jpeg');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.googleDiv{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 5px 5px 5px #707070;
+  width: 95%;
+  height: 30%;
+}
+
+.googleDiv img{
+  width: 20%;
+  height: 100%;
+}
+
+.loginBox{
+  padding: 0 35px;
+  font-weight: 600;
+  font-size: 16pt;
+  width: 25%;
+  height: 25%;
+  border: 1px solid #707050;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 5px 5px 20px #202020;
+  margin-top: 80px;
+
+}
+
+.googleButton{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background-color: #DC4A38;
+  height: 100%;
+  border-radius: 2px;
+  color: white;
+  font-size: 32px;
+  border-left: 1px solid white;
+  text-decoration: none;
+}
+
+.googleButton:hover {
+  text-decoration: none;
+  color: white;
+}
+
+.googleButton:hover{
+  background-color: #921708;
+}
+
+.userContainer{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.landingDiv{
+  margin: 6%;
+  width: 30%;
+  background-color: white;
+  padding: 30px;
+  border-radius: 15px;
+  border: 1px solid black;
+  height: 500px;
+}
+
+
+.landingDiv p{
+  text-align: center;
+}
+
+.adminLogin{
+  width: 85%;
+}
+
+.icon{
+  font-size: 48pt;
+  text-shadow: 1px 1px 1px black;
+  color: grey;
+}
+
+.controlPanel {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  height: 80%;
+  width: 100%;
+}
+
+.pane {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 85%;
+  height: 100%;
+  margin: 2% 0;
+  border: 2px solid grey;
+  border-radius: 10px;
+}
+
+.pane h1 {
+  color: #6D6DDD;
+  font-weight: 600;
+  text-shadow: 1px 1px 1px black;
+}
+
+.pane ul {
+  list-style: none;
+}
+
+.patientFields{
+  width: 80%;
+  display: none;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;;
+  align-content: flex-start;
+}
+
+.patientFields input {
+  font-size: 14pt;
+  font-weight: 400;
+  border-radius: 5px;
+  height: 30px;
+  width: 50%;
+
+}
+
+.sex {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+
+footer{
+  width: 5%;
+  text-align: center;
+  color: #808080;
 }

@@ -1,0 +1,58 @@
+extends layout
+block content
+  
+  div.mainContainer
+    header
+      div.logo
+        img(src="https://upload.wikimedia.org/wikipedia/commons/3/33/Vanamo_Logo.png" width='15%')
+        h1 COMPANY NAME
+      div.nav
+        h3 
+          a(href='/landing') Home
+        h3  
+          a(href='#') Reports
+        h3
+          a(href='#') Logout 
+           
+    div.controlPanel
+      div.pane
+        h1 Patient Information
+        ul
+          li 
+            h2.menuSelect.menu(id='personInfo') 1. Personal Information
+          li 
+            h2.menuSelect.menu(id='planType') 2. Plan
+          li 
+            h2.menuSelect.menu(id='healthIssues') 3. Health Issues
+      div.pane
+        div.personInfo.patientFields
+          form(action='#' role='form')
+          label(for='last') Last Name:
+          input.form-group(type='text' id='last' name='last')
+          label(for='first') First Name:
+          input.form-group(type='text' id='first' name='first')
+          label(for='sex') Sex:
+            div.sex
+              input.form-group(type='radio' id='sex' name='male') 
+              | Male
+              input.form-group(type='radio' id='sex' name='female') 
+              | Female
+          label(for='age') Age:
+          input.form-group(type='number' id='age' name='age')
+          label(for='pcp') PCP:
+          input.form-group(type='text' id='pcp' name='pcp')
+          button.btn.btn-primary(id='continue-perInfo') Continue
+        div.planType.patientFields
+          form(action='#')
+          label(for='enroll') Enrollment Date:
+          input.form-group(type='date' id='enroll' name='enroll')
+          label(for='disenroll') Disenrollment Date:
+          input.form-group(type='date' id='disenroll' name='disenroll')
+          button.btn.btn-primary(id='continue-planInfo') Continue
+        div.healthIssues.patientFields
+          form(action='#')
+          label(for='healthIs') Health Issues:
+          //- checked=data.checked?"checked":undefined
+          label.checkbox(for='dia') Diabetes
+          input.form-control(type="checkbox", id='dia' class='health' name="diabetes" value="value" style='width:5%')
+          button.btn.btn-primary(id='continue-hInfo') Continue
