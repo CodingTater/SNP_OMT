@@ -1,5 +1,22 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  
+  div.mainContainer
+    header
+      div.logo
+        img(src="https://upload.wikimedia.org/wikipedia/commons/3/33/Vanamo_Logo.png" width='15%')
+        h1 COMPANY NAME
+      div.nav
+        h3 
+          a(href='/landing') Home
+        h3  
+          a(href='#') Reports
+        h3
+          a(href='#') Logout 
+    div.graph-container
+      div.chart
+        //- script
+        //-   var myData = !{data}
+
+      
