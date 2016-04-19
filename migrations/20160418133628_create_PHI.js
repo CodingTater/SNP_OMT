@@ -13,7 +13,7 @@ exports.up = function(knex, Promise) {
     table.boolean('cancer');
     table.boolean('copd');
     table.boolean('esrd');
-    table.boolean('heartDisease');
+    table.boolean('heart');
     table.boolean('fracture');
   });
 };
