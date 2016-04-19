@@ -204,21 +204,6 @@ header{
   align-items: flex-start;
 }
 
-.graph-container {
-  width: 85%;
-  height: 80%;
-  background-color: white;
-  border-radius: 15px;
-}
-
-.legend {
-  font-size: 12px;
-}
-
-rect {
-  stroke-width: 2;
-}
-
 footer{
   width: 5%;
   text-align: center;
