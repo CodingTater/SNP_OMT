@@ -6,20 +6,20 @@ exports.up = function(knex, Promise) {
       .references('id')
       .inTable('patients')
       .onDelete('cascade');
-    table.date('initialHRA');
-    table.integer('daysLateInitialHRA')
-    table.date('recentHRA');
-    table.integer('daysLateRecentHRA');
-    table.date('initialICP');
-    table.integer('daysLateInitialICP')
-    table.date('recentICP');
-    table.integer('daysLateRecentICP');
-    table.date('C01Breast');
-    table.date('C02Cancer');
-    table.date('C03FluVac');
-    table.date('C12Osteoporosis');
-    table.date('C13BetusEyeCare');
-    table.date('C14BetusKidneyCare');
+    table.date('initial_hra');
+    table.integer('days_late_initial_hra')
+    table.date('recent_hra');
+    table.integer('days_late_recent_hra');
+    table.date('initial_icp');
+    table.integer('days_late_initial_icp')
+    table.date('recent_icp');
+    table.integer('days_late_recent_icp');
+    table.date('c01_breast');
+    table.date('c02_cancer');
+    table.date('c03_flu_vac');
+    table.date('c12_osteoporosis');
+    table.date('c13_betus_eyecare');
+    table.date('c14_betus_kidneycare');
   });
 };
 
