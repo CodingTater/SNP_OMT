@@ -14,6 +14,7 @@ var landing = require('./routes/landing');
 var patientData = require('./routes/patientData');
 var reports = require('./routes/reports');
 
+
 var app = express();
 
 // view engine setup
@@ -35,6 +36,7 @@ app.use('/users', users);
 app.use('/landing', landing);
 app.use('/patientData', patientData);
 app.use('/reports', reports);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
