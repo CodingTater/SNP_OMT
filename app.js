@@ -4,15 +4,21 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var LinkedInStrategy = require('passport-linkedin-oauth2').Strategy;
-var routes = require('./routes/index');
-var users = require('./routes/users');
 var login = require('./routes/login');
-var landing = require('./routes/landing')
 var logout = require('./routes/logout');
 var auth = require('./routes/auth');
-var patientData = require('./routes/patientData');
 var passport = require('passport');
 var cookieSession = require('cookie-session');
+var methodOverride = require('method-override');
+// var cookieSession = require('cookie-session');
+
+
+var routes = require('./routes/index');
+var users = require('./routes/users');
+var landing = require('./routes/landing');
+var patientData = require('./routes/patientData');
+var reports = require('./routes/reports');
+
 var app = express();
 require('dotenv').load();
 
@@ -57,12 +63,14 @@ app.use(function (req, res, next) {
   next();
 });
 
+app.use(methodOverride('_method'));
 app.use('/', routes);
 app.use('/users', users);
 app.use('/logout', logout);
 app.use('/login', login);
 app.use('/landing', landing);
 app.use('/patientData', patientData);
+app.use('/reports', reports);
 app.use('/auth', auth);
 
 

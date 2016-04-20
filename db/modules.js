@@ -4,6 +4,7 @@ module.exports = {
   patients: function patients() {
     return knex('patients');
   },
+
   measures: function measures() {
     return knex('measures');
   },
@@ -22,6 +23,9 @@ module.exports = {
       temp.push((data[i].initial_hra - data[i].enrollment)/86400000);
     }
     return temp;
+
+  patientsMeasures: function patientsMeasures() {
+    return knex('patients').innerJoin('measures', 'patients.id', 'measures.patient_id');
   }
 
 }
