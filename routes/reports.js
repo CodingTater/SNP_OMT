@@ -9,10 +9,24 @@ router.get('/', (req, res, next)=> {
 });
 
 router.get('/initial_hra', (req, res, next) => {
-  Modules.initialHRA().then(function(data) {
-    var dateDiff = (data[0].initial_hra - data[0].enrollment)/86400000;
-    console.log(dateDiff);
-    res.render('reports', {title: data[0].last});
+  var array = [];
+  var iHraSixtyPlusDays = Modules.iHraSixtyPlusDays();
+  var iHraThirtyToSixty = Modules.iHraThirtyToSixty();
+  var iHraNextThirtyDays = Modules.iHraNextThirtyDays();
+  var iHraOverDue = Modules.iHraOverDue();
+
+  Promise.all([iHraSixtyPlusDays, iHraThirtyToSixty, iHraThirtyToSixty, iHraOverDue]).then(function (data) {
+    array = [
+      {title: 'Initial HRA'},
+      {label: '60 Days to go', count: data[0].length},
+      {label: '30 Days to go', count: data[0].length},
+      {label: '60 Days to go', count: data[0].length},
+      {label: '60 Days to go', count: data[0].length},
+      {label: '60 Days to go', count: data[0].length},
+      {label: '60 Days to go', count: data[0].length},
+    ]
+    console.log(data);
+    res.send(data);
   });
 });
 
