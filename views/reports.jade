@@ -14,8 +14,16 @@ block content
         h3
           a(href='#') Logout 
     div.graph-container
-      div.chart
-        //- script
-        //-   var myData = !{data}
+      h1.graph-title
+      div.chart-container
+        div.form-group
+          label(for="select-data") Select Data
+          select.form-control(type="select", class="select-data")
+            option.form-control(value='')
+            option.form-control(value='breast-cancer' id='breast') Breast Cancer Screening
+            option.form-control(value='breast-cancer' id='eye') Eye Exam
+          
+        div.chart
+      
 
       
