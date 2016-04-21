@@ -1,4 +1,5 @@
 (function(d3) {
+  var tableData = [];
 
   $('.select-data').on('change', function() {
     var endPoint = $(this).find("option:selected").attr("id");
@@ -11,9 +12,34 @@
 
     request.done(function(data) {
       $('.chart').find('svg').first().remove();
-      drawGraph(data);
+
+      drawGraph(data.graph);
+      tableData = data.table;
+    });
+
+    request.error(function(error) {
+      console.log(error);
     });
   });
+
+  $('body').on('click', 'path', function() {
+    window.tableData = tableData;
+    console.log('in here');
+    var dataID = $(this).attr('id');
+    var title = $(this).attr('class');
+
+    $('.table-title').text(title);
+    // tableData.forEach(function(obj) {
+    //   console.log(obj);
+    //   if (obj.hasOwnProperty(dataID)) {
+    //       console.log(obj.dataID);
+    //     }
+    // });
+  });
+
+  function populateTable(data) {
+
+  };
 
   function drawGraph(data) {
     var title = $('h1.graph-title').text(data[0].title);
@@ -64,10 +90,16 @@
       .enter()
       .append('path')
       .attr('d', arc)
+      .attr('id', function(d) {
+        return d.data.id;
+      })
+      .attr('class', function(d) {
+        return d.data.label;
+      })
       .attr('fill', function(d, i) {
         return color(d.data.label);
-    })
-    .each(function(d) { this._current = d; });
+      })
+      .each(function(d) { this._current = d; });
 
     path.on('mouseover', function(d) {
       var total = d3.sum(dataset.map(function(d) {
@@ -149,8 +181,4 @@
       .attr('y', legendRectSize - legendSpacing)
       .text(function(d) { return d; });
   };
-
-  // request.error(function(error) {
-  //   console.log(error);
-  // });
 })(window.d3);

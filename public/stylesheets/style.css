@@ -6,10 +6,6 @@ body {
   height: 100vh;
 }
 
-a {
-  color: #00B7FF;
-}
-
 header{
   display: flex;
   flex-direction: row;
@@ -22,6 +18,7 @@ header{
 }
 
 .logo {
+  height: 100%;
   width: 50%;
   display: flex;
   flex-direction: row;
@@ -31,6 +28,7 @@ header{
 
 .nav {
   display: flex;
+  height: 100%;
   width: 50%;
   flex-direction: row;
   justify-content: space-between;
@@ -48,7 +46,7 @@ header{
 }
 
 .mainContainer{
-  height: 90%;
+  height: 95%;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -123,11 +121,11 @@ header{
 .landingDiv{
   margin: 6%;
   width: 30%;
-  background-color: white;
+  background-color: #CACCCE;
   padding: 30px;
   border-radius: 15px;
-  border: 1px solid black;
-  height: 500px;
+  border: 2px solid white;
+  height: 400px;
 }
 
 
@@ -204,8 +202,10 @@ header{
   align-items: flex-start;
 }
 
-.legend {
+.legend text{
   font-size: 12pt;
+  fill: white;
+  text-shadow: 1px 1px 1px black;
 }
 
 rect {
@@ -217,33 +217,59 @@ rect.disabled {
   fill: transparent !important;
 }
 
-.chart-container {
+.graph-container {
   width: 100%;
-  height: 100%;
+  height: 85%;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
 
-.chart-container .form-group {
-  width: 80%;
-  margin-right: 50px;
-}
-
-.graph-container {
-  width: 100%;
-  height: 100%;
+.graph-container .form-group {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  position: relative;
+  width: 40%;
+  height: 100%;
+  margin: 0;
 }
 
-.chart {
-  width: 100%;
-  position: relative;
+.select-data {
+  width: 45%;
+  height: 35px;
+  font-size: 14pt;
+}
+
+.patient-table {
+  height: 45%;
+  width: 80%;
+  overflow: scroll;
+}
+
+.patient-table .table{
+  background-color: #DDDDDD;
+}
+
+.form-group h2 {
+  width: 80%;
+  margin-top: 10%;
+  background-color: #337AB7;
+  padding: 10px;
+  border-radius: 5px;
+  color: white;
+  text-shadow: 1px 1px 1px black;
+}
+
+.graph-container .chart {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 60%;
+  height: 100%;
 }
 
 .label {
@@ -269,17 +295,96 @@ rect.disabled {
 
 .graph-title {
   margin: 10px;
+  color: white;
+  text-shadow: 1px 1px 1px black;
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 1%;
+  left: 5%;
+}
+
+.addNewButton {
+  margin-bottom: 40px;
+  margin-top: 20px;
 }
 
 footer{
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
-  width: 5%;
+  width: 100%
+  height: 5%;
   text-align: center;
   color: #808080;
+  border-top: 2px solid white;
+}
+
+.header2{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  color: white;
+  text-shadow: 3px 3px 3px black;
+}
+
+.mainContainer2{
+  height: 95vh;
+  background-image: url('../images/login_background1.jpeg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: white;
+
+}
+
+.loginBox2{
+  background-color: #404040;
+  border: 2px solid white;
+  color: white;
+  font-size: 16pt;
+  border-radius: 15px;
+  padding-bottom: 4%;
+  padding-top: 2%;
+  margin-top: 10%;
+  text-shadow: 2px 2px 2px black;
+
+}
+
+.logo2{
+  height: 90px;
+  width: 65px;
+  margin-right: 20px;
+  margin-left: 20px;
+}
+
+.linkedInButton{
+ height: 75px;
+ border: 1px solid white;
+ padding: 15px 80px;
+ border-radius: 10px;
+ background: grey;
+}
+
+.linkedInButton:hover{
+  background: #606060;
+}
+
+.controlPanelHeaders{
+  font-weight: 300;
+  margin-bottom: 40px;
+  cursor: pointer;
+}
+
+.leftForm{
+  height: 400px;
+  background-color: white;
+}
+
+.rightForm{
+  height: 400px;
+  background-color: white;
+}
+
+.male{
+  margin-right: 100px;
 }

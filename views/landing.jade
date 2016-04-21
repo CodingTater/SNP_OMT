@@ -2,8 +2,8 @@ extends layout
 block content
   div.mainContainer
     header 
-      img(src="https://upload.wikimedia.org/wikipedia/commons/3/33/Vanamo_Logo.png" width='5%')
-      h1 COMPANY NAME
+      img.logo2(src="http://www.clker.com/cliparts/N/5/f/c/9/D/blue-security-shield-md.png")
+      h1 Fortified Health
     div.userContainer
       div.landingDiv
         p.icon 
@@ -22,16 +22,17 @@ block content
           div.form-group
 
               a.btn.btn-primary(href="/patientData" role="button") Login
+        p.landingDivText Add new patient data or Access Existing Patient Data
+        a.btn.btn-primary.center-block.addNewButton(href="/add_patient" role="button" style="width:70%") Add New Patient
           
-          a.btn.btn-default(href="users/create" role="button") Create Account
+        a.btn.btn-primary.center-block(href="/edit_patient" role="button" style="width:70%") Edit Existing Patient
       div.landingDiv
         p.icon
           i(class="fa fa-pie-chart" aria-hidden="true")
-        br
-        br
+        p.landingDivText Create and View Reports Based on Patient Metrics  
         br
         br  
-        a.btn.btn-primary.center-block(href="#" role="button" style="width:70%") Generate Reports
+        a.btn.btn-primary.center-block(href="/reports" role="button" style="width:70%") Generate Reports
         
       
       

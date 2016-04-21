@@ -5,6 +5,9 @@ var sixtyDays = new Date();
     sixtyDays.setDate(sixtyDays.getDate()-60);
 var ninetyDays = new Date();
     ninetyDays.setDate(ninetyDays.getDate()-90);
+var yearAgo = new Date();
+    yearAgo.setDate(yearAgo.getDate()-365);
+
 
 var pgFormatDate = function(date)  {
   function zeroPad(d) {
@@ -14,6 +17,18 @@ var pgFormatDate = function(date)  {
   var parsed = new Date(date)
 
   return [parsed.getUTCFullYear(), zeroPad(parsed.getMonth() + 1), zeroPad(parsed.getDate())].join('');
+};
+
+var newEnrollees = function(data) {
+  var newEnrollee = [];
+  var oldEnrollee = [];
+  for (var i = 0; i < data.length; i++) {
+    if (data[i].enrollment > yearAgo) {
+      newEnrollee.push(data[i]);
+    } else {
+      oldEnrollee.push(data[i]);
+    }
+  }
 };
 
 module.exports = {
@@ -61,7 +76,28 @@ module.exports = {
   iHraOverDue: function iHraOverDue () {
     return knex('patients').innerJoin('measures', 'patients.id', 'measures.patient_id').select().whereNull('measures.initial_hra').whereNot('enrollment', '>', pgFormatDate(ninetyDays));
   },
-  compliantInitialHra: function initialHRA () {
-    return knex('patients').innerJoin('measures', 'patients.id', 'measures.patient_id').select().where('measures.initial_hra');
-  }
+  c01_breast: function c01_breast () {
+    return knex('patients').innerJoin('measures', 'patients.id', 'measures.patient_id').select().where('patients.gender', 'Female');
+  },
+  breastSixtyPlus: function breastSixtyPlus () {
+    return knex('patients').innerJoin('measures', 'patients.id', 'measures.patient_id').select().where('patients.gender', 'female').whereNot('enrollment', '>', pgFormatDate(ninetyDays));
+  },
+  breastThirtyPlus: function breastThirtyPlus () {
+    return knex('patients').innerJoin('measures', 'patients.id', 'measures.patient_id').select().whereNull('measures.initial_hra').whereNot('enrollment', '>', pgFormatDate(ninetyDays));
+  },
+  breastLessThanThirty: function breastLessThanThirty () {
+    return knex('patients').innerJoin('measures', 'patients.id', 'measures.patient_id').select().whereNull('measures.initial_hra').whereNot('enrollment', '>', pgFormatDate(ninetyDays));
+  },
+  breastOverdueThirty: function breastOverdueThirty () {
+    return knex('patients').innerJoin('measures', 'patients.id', 'measures.patient_id').select().whereNull('measures.initial_hra').whereNot('enrollment', '>', pgFormatDate(ninetyDays));
+  },
+  breastOverdueSixty: function breastOverdueSixty () {
+    return knex('patients').innerJoin('measures', 'patients.id', 'measures.patient_id').select().whereNull('measures.initial_hra').whereNot('enrollment', '>', pgFormatDate(ninetyDays));
+  },
+  breastOverdueNinety: function breastOverdueNinety () {
+    return knex('patients').innerJoin('measures', 'patients.id', 'measures.patient_id').select().whereNull('measures.initial_hra').whereNot('enrollment', '>', pgFormatDate(ninetyDays));
+  },
+  breastOverdueNinetyPlus: function breastOverdueNinetyPlus () {
+    return knex('patients').innerJoin('measures', 'patients.id', 'measures.patient_id').select().whereNull('measures.initial_hra').whereNot('enrollment', '>', pgFormatDate(ninetyDays));
+  },
 }
