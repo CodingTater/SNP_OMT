@@ -12,7 +12,7 @@ block content
     .row
       .leftForm.col-xs-4.col-xs-offset-2
         .row
-          h2 Edit Patient Information
+          h2 Edit #{patient.first} #{patient.last}
         .row
           h3.menuSelect.menu(id='personInfo') 1. Personal Information
           h3.menuSelect.menu(id='planType') 2. Plan  
@@ -20,11 +20,11 @@ block content
       .rightForm.col-xs-4
         form.patientFields.personInfo(action='#' role='form')
           .form-group
-            label(for='last') Name
-            input.form-control(type='text' id='last' name='name' value=patient.name)
+            label(for='last') Last Name
+            input.form-control(type='text' id='last' name='last' value=patient.last)
           .form-group
             label(for='first') First Name
-            input.form-control(type='text' id='first' name='first')
+            input.form-control(type='text' id='first' name='first' value=)
           .radio-inline
             input(type='radio', id='male', name='sex')    
             label(for='sex') Male

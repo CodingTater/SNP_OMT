@@ -307,7 +307,7 @@ exports.seed = function(knex, Promise) {
   for (var i = 0; i < val.length; i++) {
     inserts.push(knex('measures').insert({ patient_id: val[i][0], initial_hra: val[i][1], days_late_initial_hra: val[i][2], recent_hra: val[i][3], days_late_recent_hra: val[i][4], initial_icp: val[i][5], days_late_initial_icp: val[i][6], recent_icp: val[i][7], days_late_recent_icp: val[i][8], c01_breast: val[i][9], c02_cancer: val[i][10], c03_flu_vac: val[i][11], c12_osteoporosis: val[i][12], c13_betus_eyecare: val[i][13], c14_betus_kidneycare: val[i][14] }));
   }
-  return knex('patients').del().then(() => {
+  return knex('measures').del().then(() => {
     return Promise.all(inserts);
   });
 };
