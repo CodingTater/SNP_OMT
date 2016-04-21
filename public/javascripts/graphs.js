@@ -60,6 +60,7 @@
     dataset.forEach(function(d) {
       d.enabled = true;
     });
+
     var svgWidth = 700;
     var width = 500;
     var height = 500;
