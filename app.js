@@ -19,8 +19,6 @@ const LinkedInStrategy = require('passport-linkedin-oauth2').Strategy;
 const app = express();
 require('dotenv').load();
 
-var app = express();
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -37,11 +35,13 @@ passport.use(new LinkedInStrategy({
         knex('users').insert({
           name: profile.displayName,
           pass: profile.id,
-          email: profile.emails[0].value
+          email: profile.emails[0].value,
+          photo: profile.photos[0].value
         }, '*').then(newUser => {
           return done(null, newUser[0]);
         });
       } else {
+        // console.log(us);
         return done(null, user);
       }
     });
@@ -72,7 +72,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(function (req, res, next) {
   res.locals.user = req.user;
-  console.log(req.user.pass);
+  console.log("PIC: " + req.user.photo);
   next();
 });
 

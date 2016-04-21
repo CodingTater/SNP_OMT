@@ -4,7 +4,7 @@ const knex = require('../db/knex');
 const Modules = require('../db/modules');
 
 router.get('/', function(req, res, next) {
-  if (req.user.admin === true) {
+  if (req.user.admin === false) {
     res.render('patientData');
   } else {
     res.render('landing', { error: "You need to have admin clearance for this" });
