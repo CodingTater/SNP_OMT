@@ -13,8 +13,8 @@
     request.done(function(data) {
       $('.chart').find('svg').first().remove();
 
-      drawGraph(data.graph);
-      tableData = data.table;
+      drawGraph(data);
+      //tableData = data.table;
     });
 
     request.error(function(error) {
@@ -70,7 +70,7 @@
     // var color = d3.scale.category10();
 
     var color = d3.scale.ordinal()
-      .range(['#9B0000', '#FF3939', '#FF6363', '#FF9339', '#FFAA63',  '#54D954', '#00CC00', '#009E00']);
+      .range(['#009E00', '#00CC00', '#54D954', '#FFAA63', '#FF9339',  '#FF6363', '#FF3939', '#9B0000']);
 
     var svg = d3.select('.chart')
       .append('svg')
