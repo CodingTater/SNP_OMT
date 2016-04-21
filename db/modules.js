@@ -33,13 +33,5 @@ module.exports = {
     return knex('patients').innerJoin('measures', 'patients.id', 'measures.patient_id');
   },
 
-  authenticateUser: function authenticate(admin, callback) {
-    if (admin === false) {
-      return callback("You need to have admin clearance for this");
-    } else {
-        return callback(`Welcome ${req.user.name}`);
-      }
-  }
-
 
 }

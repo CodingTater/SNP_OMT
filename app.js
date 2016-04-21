@@ -3,7 +3,6 @@ const path = require('path');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
-const LinkedInStrategy = require('passport-linkedin-oauth2').Strategy;
 const login = require('./routes/login');
 const logout = require('./routes/logout');
 const passport = require('passport');
@@ -15,6 +14,7 @@ const users = require('./routes/users');
 const landing = require('./routes/landing');
 const patientData = require('./routes/patientData');
 const reports = require('./routes/reports');
+const LinkedInStrategy = require('passport-linkedin-oauth2').Strategy;
 
 const app = express();
 require('dotenv').load();
