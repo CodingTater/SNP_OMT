@@ -11,9 +11,4 @@ router.get('/', function(req, res, next) {
   }
 });
 
-router.post('/', (req, res, next)=> {
-
-    res.render('edit')
-  })
-
 module.exports = router;
