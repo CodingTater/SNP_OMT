@@ -2,8 +2,16 @@ extends layout
 block content
   div.mainContainer
     header 
-      img.logo2(src="http://www.clker.com/cliparts/N/5/f/c/9/D/blue-security-shield-md.png")
-      h1 Fortified Health
+      div.logo
+        img.logo2(src="http://www.clker.com/cliparts/N/5/f/c/9/D/blue-security-shield-md.png")
+        h1 Fortified Health
+      div.nav
+        h3 
+          a(href='/landing') Home
+        h3  
+          a(href='#') Reports
+        h3
+          a(href='#') Logout 
     div.userContainer
       div.landingDiv
         p.icon 
