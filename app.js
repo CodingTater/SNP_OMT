@@ -19,6 +19,8 @@ const LinkedInStrategy = require('passport-linkedin-oauth2').Strategy;
 const app = express();
 require('dotenv').load();
 
+var app = express();
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');

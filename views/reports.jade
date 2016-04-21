@@ -1,5 +1,4 @@
 extends layout
-
 block content
   
   div.mainContainer
@@ -7,6 +6,7 @@ block content
       div.logo
         img(src="https://upload.wikimedia.org/wikipedia/commons/3/33/Vanamo_Logo.png" width='15%')
         h1 COMPANY NAME
+        p= test
       div.nav
         h3 
           a(href='/landing') Home
@@ -15,8 +15,16 @@ block content
         h3
           a(href='#') Logout 
     div.graph-container
-      div.chart
-        //- script
-        //-   var myData = !{data}
+      h1.graph-title
+      div.chart-container
+        div.form-group
+          label(for="select-data") Select Data
+          select.form-control(type="select", class="select-data")
+            option.form-control(value='')
+            option.form-control(value='breast-cancer' id='breast') Breast Cancer Screening
+            option.form-control(value='breast-cancer' id='eye') Eye Exam
+          
+        div.chart
+      
 
       
