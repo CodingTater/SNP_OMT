@@ -32,6 +32,7 @@ router.get('/initial_hra', (req, res, next) => {
 
 router.get('/c01_breast', (req, res, next) => {
   Modules.c01_breast().then(function (data) {
+
     var array = [];
     var ninetyPlus = [];
     var sixtyToNinety = [];
@@ -41,6 +42,7 @@ router.get('/c01_breast', (req, res, next) => {
     var overThirtyToSixty = [];
     var overSixtyToNinety = [];
     var overNinety = [];
+
     for (var i = 0; i < data.length; i++) {
       var patient = data[i];
       var patientE = patient.enrollment;
