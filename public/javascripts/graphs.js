@@ -1,5 +1,8 @@
 (function(d3) {
+<<<<<<< HEAD
   var tableData = [];
+=======
+>>>>>>> 498ec9d986cd9fc0978a6ec7c94ae57ae2b85d03
 
   $('.select-data').on('change', function() {
     var endPoint = $(this).find("option:selected").attr("id");
@@ -12,6 +15,7 @@
 
     request.done(function(data) {
       $('.chart').find('svg').first().remove();
+<<<<<<< HEAD
 
       drawGraph(data.graph);
       tableData = data.table;
@@ -41,6 +45,12 @@
 
   };
 
+=======
+      drawGraph(data);
+    });
+  });
+
+>>>>>>> 498ec9d986cd9fc0978a6ec7c94ae57ae2b85d03
   function drawGraph(data) {
     var title = $('h1.graph-title').text(data[0].title);
     $('.graph-container').append(title);
@@ -98,8 +108,13 @@
       })
       .attr('fill', function(d, i) {
         return color(d.data.label);
+<<<<<<< HEAD
       })
       .each(function(d) { this._current = d; });
+=======
+    })
+    .each(function(d) { this._current = d; });
+>>>>>>> 498ec9d986cd9fc0978a6ec7c94ae57ae2b85d03
 
     path.on('mouseover', function(d) {
       var total = d3.sum(dataset.map(function(d) {
@@ -181,4 +196,11 @@
       .attr('y', legendRectSize - legendSpacing)
       .text(function(d) { return d; });
   };
+<<<<<<< HEAD
+=======
+
+  // request.error(function(error) {
+  //   console.log(error);
+  // });
+>>>>>>> 498ec9d986cd9fc0978a6ec7c94ae57ae2b85d03
 })(window.d3);

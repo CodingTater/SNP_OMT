@@ -4,8 +4,14 @@ block content
   div.mainContainer
     header
       div.logo
+<<<<<<< HEAD
         img.logo2(src="http://www.clker.com/cliparts/N/5/f/c/9/D/blue-security-shield-md.png")
         h1 Fortified Health
+=======
+        img(src="https://upload.wikimedia.org/wikipedia/commons/3/33/Vanamo_Logo.png" width='15%')
+        h1 COMPANY NAME
+        p= test
+>>>>>>> 498ec9d986cd9fc0978a6ec7c94ae57ae2b85d03
       div.nav
         h3 
           a(href='/landing') Home
@@ -15,6 +21,7 @@ block content
           a(href='#') Logout 
     div.graph-container
       h1.graph-title
+<<<<<<< HEAD
       div.form-group
         select.form-control(type="select", class="select-data")
           option.form-control(value='') Select Data
@@ -80,5 +87,17 @@ block content
           
       div.chart
     
+=======
+      div.chart-container
+        div.form-group
+          label(for="select-data") Select Data
+          select.form-control(type="select", class="select-data")
+            option.form-control(value='')
+            option.form-control(value='breast-cancer' id='breast') Breast Cancer Screening
+            option.form-control(value='breast-cancer' id='eye') Eye Exam
+          
+        div.chart
+      
+>>>>>>> 498ec9d986cd9fc0978a6ec7c94ae57ae2b85d03
 
       
