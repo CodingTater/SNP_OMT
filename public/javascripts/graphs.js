@@ -23,22 +23,31 @@
   });
 
   $('body').on('click', 'path', function() {
-    window.tableData = tableData;
-    console.log('in here');
     var dataID = $(this).attr('id');
     var title = $(this).attr('class');
 
     $('.table-title').text(title);
-    // tableData.forEach(function(obj) {
-    //   console.log(obj);
-    //   if (obj.hasOwnProperty(dataID)) {
-    //       console.log(obj.dataID);
-    //     }
-    // });
+
+    tableData.forEach(function(obj) {
+      if (obj.hasOwnProperty(dataID)) {
+          populateTable(obj[dataID]);
+        }
+    });
   });
 
   function populateTable(data) {
+    var tableBody = $('.patient-table tbody');
+    tableBody.empty();
 
+    data.forEach(function(obj) {
+      var patientId = $('<td>' + obj.id + '</td>');
+      var pcp = $('<td>' + obj.pcp + '</td>');
+      var row = $('<tr>');
+
+      tableBody.append(row);
+      row.append(patientId);
+      row.append(pcp);
+    });
   };
 
   function drawGraph(data) {
@@ -51,6 +60,7 @@
     dataset.forEach(function(d) {
       d.enabled = true;
     });
+
     var svgWidth = 700;
     var width = 500;
     var height = 500;
