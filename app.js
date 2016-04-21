@@ -6,7 +6,6 @@ const bodyParser = require('body-parser');
 const LinkedInStrategy = require('passport-linkedin-oauth2').Strategy;
 const login = require('./routes/login');
 const logout = require('./routes/logout');
-// const auth = require('./routes/auth');
 const passport = require('passport');
 const cookieSession = require('cookie-session');
 const methodOverride = require('method-override');
@@ -83,7 +82,6 @@ app.use('/login', login);
 app.use('/landing', landing);
 app.use('/patientData', patientData);
 app.use('/reports', reports);
-// app.use('/auth', auth);
 
 
 app.get('/auth/linkedin', passport.authenticate('linkedin'));
