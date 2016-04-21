@@ -33,6 +33,7 @@ router.get('/initial_hra', (req, res, next) => {
   Promise.all([iHraSixtyPlusDays, iHraThirtyToSixty, iHraThirtyToSixty, iHraOverDue]).then(function (data) {
     array = [
       {title: 'Initial HRA'},
+
       {label: 'More than 60 Days', count: data[0].length},
       {label: 'More than 30 Days', count: data[1].length},
       {label: 'Less than 30 Days', count: data[2].length},
@@ -47,6 +48,7 @@ router.get('/c01_breast', (req, res, next) => {
     console.log(sixty);
     res.send(array);
     });
+
   });
 });
 

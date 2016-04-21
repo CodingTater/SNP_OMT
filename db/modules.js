@@ -5,8 +5,11 @@ var sixtyDays = new Date();
     sixtyDays.setDate(sixtyDays.getDate()-60);
 var ninetyDays = new Date();
     ninetyDays.setDate(ninetyDays.getDate()-90);
+<<<<<<< HEAD
 var yearAgo = new Date();
     yearAgo.setDate(yearAgo.getDate()-365);
+=======
+>>>>>>> master
 
 var pgFormatDate = function(date)  {
   function zeroPad(d) {
@@ -17,6 +20,7 @@ var pgFormatDate = function(date)  {
 
   return [parsed.getUTCFullYear(), zeroPad(parsed.getMonth() + 1), zeroPad(parsed.getDate())].join('');
 };
+<<<<<<< HEAD
 
 var newEnrollees = function(data) {
   var newEnrollee = [];
@@ -29,8 +33,11 @@ var newEnrollees = function(data) {
     }
   }
 };
+=======
+>>>>>>> master
 
 module.exports = {
+
   patients: function patients() {
     return knex('patients');
   },
@@ -52,6 +59,7 @@ module.exports = {
   iHraOverDue: function iHraOverDue () {
     return knex('patients').innerJoin('measures', 'patients.id', 'measures.patient_id').select().whereNull('measures.initial_hra').whereNot('enrollment', '>', pgFormatDate(ninetyDays));
   },
+<<<<<<< HEAD
   c01_breast: function c01_breast () {
     return knex('patients').innerJoin('measures', 'patients.id', 'measures.patient_id').select().where('patients.gender', 'Female');
   },
@@ -77,4 +85,9 @@ module.exports = {
     return knex('patients').innerJoin('measures', 'patients.id', 'measures.patient_id').select().whereNull('measures.initial_hra').whereNot('enrollment', '>', pgFormatDate(ninetyDays));
   },
 
+=======
+  compliantInitialHra: function initialHRA () {
+    return knex('patients').innerJoin('measures', 'patients.id', 'measures.patient_id').select().where('measures.initial_hra');
+  }
+>>>>>>> master
 }

@@ -1,5 +1,14 @@
 extends layout
-
 block content
-  h1= title
-  p Welcome to #{title}
+  .container-fluid
+    .row.mainContainer2 
+      header.header2.col-xs-12 
+        img.logo2(src="http://www.clker.com/cliparts/N/5/f/c/9/D/blue-security-shield-md.png")
+        h1 Fortified Health 
+      .row.col-xs-4.col-xs-offset-4.loginBox2
+        .row
+          p.text-center Please Log-In:
+        .row
+          a.col-xs-12(href='/landing')
+            //- .g-signin2.specialButton(data-onsuccess='onSignIn')
+            img.center-block.img-responsive.linkedInButton(src="../images/LinkedIn_Logo.svg.png")
