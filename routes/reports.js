@@ -44,61 +44,46 @@ router.get('/initial_hra', (req, res, next) => {
 });
 
 router.get('/c01_breast', (req, res, next) => {
-
-    console.log(sixty);
+    array = [];
+    console.log();
     res.send(array);
     });
 
   });
 });
 
-// router.get('/c01_breast', (req, res, next) => {
-//   var array = [];
-//   var ninetyPlus = [];
-//   var sixtyToNinety = [];
-//   var thirtyToSixty = [];
-//   var thirtyLess = [];
-//   var overThirtyLess = [];
-//   var overThirtyToSixty = [];
-//   var overSixtyToNinety = [];
-//   var overNinety = [];
-//   Modules.c01_breast().then(function (data) {
-//     for (var i = 0; i < data.length; i++) {
-//       var patient = data[i];
-//       var patientE = patient.enrollment;
-//       var patientB = patient.c01_breast;
-//
-//       if (patientB > yearAgo) {
-//         ninetyPlus.push(patient);
-//       } else if (patientE > ninety && patientB === null) {
-//         ninetyPlus.push(patient);
-//       } else if (patientE > sixty && patientB === null) {
-//         sixtyToNinety.push(patient);
-//       } else if (patientE > thirty && patientB === null) {
-//         thirtyToSixty.push(patient);
-//       } else if (patientE > yearAgo && patientB === null) {
-//         thirtyLess.push(patient);
-//       } else  if ()
-//         overNinety.push(patient);
-//       }
-//   }
-//   Promise.all([ninetyPlus, sixtyToNinety, thirtyToSixty, thirtyLess, overThirtyLess, overThirtyToSixty, overSixtyToNinety, overNinety]).then(function (data) {
-//     array = [
-//       {title: 'Breast Cancer Screening'},
-//       {label: 'More than 90 Days', count: ninetyPlus.length},
-//       {label: 'Between 90 and 60 Days', count: sixtyToNinety.length},
-//       {label: 'Between 60 and 30 Days', count: thirtyToSixty.length},
-//       {label: 'Less than 30 Days', count: thirtyLess.length},
-//       {label: 'Overdue less than 30 Days', count: overThirtyLess.length},
-//       {label: 'Overdue between 30 and 60 Days', count: overThirtyToSixty.length},
-//       {label: 'Overdue between 60 and 90 Days', count: overSixtyToNinety.length},
-//       {label: 'Overdue more than 90 Days', count: overNinety.length},
-//     ];
-//     console.log(sixty);
-//     res.send(array);
-//     });
-//   });
-// });
+router.get('/c01_breast', (req, res, next) => {
+  var array = [];
+  var ninetyPlus = [];
+  var sixtyToNinety = [];
+  var thirtyToSixty = [];
+  var thirtyLess = [];
+  var overThirtyLess = [];
+  var overThirtyToSixty = [];
+  var overSixtyToNinety = [];
+  var overNinety = [];
+  Modules.c01_breast().then(function (data) {
+      array.push(moment(data[0].enrollment));
+
+  }
+  // Promise.all([ninetyPlus, sixtyToNinety, thirtyToSixty, thirtyLess, overThirtyLess, overThirtyToSixty, overSixtyToNinety, overNinety]).then(function (data) {
+  //   array = [
+  //     {title: 'Breast Cancer Screening'},
+  //     {label: 'More than 90 Days', count: ninetyPlus.length},
+  //     {label: 'Between 90 and 60 Days', count: sixtyToNinety.length},
+  //     {label: 'Between 60 and 30 Days', count: thirtyToSixty.length},
+  //     {label: 'Less than 30 Days', count: thirtyLess.length},
+  //     {label: 'Overdue less than 30 Days', count: overThirtyLess.length},
+  //     {label: 'Overdue between 30 and 60 Days', count: overThirtyToSixty.length},
+  //     {label: 'Overdue between 60 and 90 Days', count: overSixtyToNinety.length},
+  //     {label: 'Overdue more than 90 Days', count: overNinety.length},
+  //   ];
+    res.send(array);
+    // });
+  });
+});
+
+
 // for (var i = 0; i<data.length; i++) {
 //   if (data[i].enrollment > today - 365) {
 //
