@@ -1,6 +1,10 @@
 const knex = require('./knex');
 
 module.exports = {
+  users:  function users() {
+    return knex('users');
+  },
+
   patients: function patients() {
     return knex('patients');
   },
@@ -23,10 +27,19 @@ module.exports = {
       temp.push((data[i].initial_hra - data[i].enrollment)/86400000);
     }
     return temp;
+  },
 
   patientsMeasures: function patientsMeasures() {
     return knex('patients').innerJoin('measures', 'patients.id', 'measures.patient_id');
+  },
+
+  authenticateUser: function authenticate(admin, callback) {
+    if (admin === false) {
+      return callback("You need to have admin clearance for this");
+    } else {
+        return callback(`Welcome ${req.user.name}`);
+      }
   }
 
-// temp to get branch
+
 }

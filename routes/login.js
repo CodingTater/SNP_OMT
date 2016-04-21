@@ -3,7 +3,7 @@ var router = express.Router();
 
 
 router.get('/', (req, res, next)=> {
-  // req.session = null;
+  // log(req.user.admin);
   res.render('login');
 });
 

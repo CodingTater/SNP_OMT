@@ -1,10 +1,14 @@
-var express = require('express');
-var router = express.Router();
-var knex = require('../db/knex');
-var Modules = require('../db/modules');
+const express = require('express');
+const router = express.Router();
+const knex = require('../db/knex');
+const Modules = require('../db/modules');
 
-router.get('/patientData', (req, res, next)=> {
-  res.render('patientData');
+router.get('/', function(req, res, next) {
+  if (req.user.admin === true) {
+    res.render('patientData');
+  } else {
+    res.render('landing', { error: "You need to have admin clearance for this" });
+    }
 });
 
 router.post('/patientData', (req, res, next)=> {

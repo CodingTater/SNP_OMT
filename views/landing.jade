@@ -11,7 +11,8 @@ block content
         p Add patient data  
         p or 
         p upload .CSV
-        form.adminLogin(action='#' method='post')
+        p #{error}
+        form.adminLogin(action='/patientData' method='post')
           div.form-group
             label(for="username") Username
             input.form-control(type="text" id="username" name="username" value= '' placeholder="Enter username...")

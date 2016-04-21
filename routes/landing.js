@@ -1,10 +1,14 @@
-var express = require('express');
-var router = express.Router();
-var knex = require('../db/knex');
-var Modules = require('../db/modules');
+const express = require('express');
+const router = express.Router();
+const knex = require('../db/knex');
+const Modules = require('../db/modules');
 
-router.get('/landing', (req, res, next)=> {
-  res.render('landing', { company: "SNP" })
+router.get('/', function(req, res, next) {
+  if(req.user) {
+        res.render('landing', { company: "SNP" });
+  } else {
+    res.render('/login', { error: "You need to validate through LinkedIn" });
+  }
 });
 
 module.exports = router;

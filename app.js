@@ -1,25 +1,23 @@
-var express = require('express');
-var path = require('path');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var LinkedInStrategy = require('passport-linkedin-oauth2').Strategy;
-var login = require('./routes/login');
-var logout = require('./routes/logout');
-var auth = require('./routes/auth');
-var passport = require('passport');
-var cookieSession = require('cookie-session');
-var methodOverride = require('method-override');
-// var cookieSession = require('cookie-session');
+const express = require('express');
+const path = require('path');
+const logger = require('morgan');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const LinkedInStrategy = require('passport-linkedin-oauth2').Strategy;
+const login = require('./routes/login');
+const logout = require('./routes/logout');
+// const auth = require('./routes/auth');
+const passport = require('passport');
+const cookieSession = require('cookie-session');
+const methodOverride = require('method-override');
+const knex = require('./db/knex.js');
+const routes = require('./routes/index');
+const users = require('./routes/users');
+const landing = require('./routes/landing');
+const patientData = require('./routes/patientData');
+const reports = require('./routes/reports');
 
-
-var routes = require('./routes/index');
-var users = require('./routes/users');
-var landing = require('./routes/landing');
-var patientData = require('./routes/patientData');
-var reports = require('./routes/reports');
-
-var app = express();
+const app = express();
 require('dotenv').load();
 
 // view engine setup
@@ -33,15 +31,28 @@ passport.use(new LinkedInStrategy({
   scope: ['r_emailaddress', 'r_basicprofile'],
   state: true,
 }, function(accessToken, refreshToken, profile, done) {
-
-  return done(null, profile);
+    knex('users').where({ pass: profile.id }).first().then((user) => {
+      if (!user) {
+        knex('users').insert({
+          name: profile.displayName,
+          pass: profile.id,
+          email: profile.emails[0].value
+        }, '*').then(newUser => {
+          return done(null, newUser[0]);
+        });
+      } else {
+        return done(null, user);
+      }
+    });
 }));
 
 passport.serializeUser(function(user, done) {
+  // console.log('serialize', user);
   done(null, user);
 });
 
 passport.deserializeUser(function(user, done) {
+  // console.log('deserialize', user);
   done(null, user);
 });
 
@@ -60,6 +71,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(function (req, res, next) {
   res.locals.user = req.user;
+  console.log(req.user.pass);
   next();
 });
 
@@ -71,7 +83,7 @@ app.use('/login', login);
 app.use('/landing', landing);
 app.use('/patientData', patientData);
 app.use('/reports', reports);
-app.use('/auth', auth);
+// app.use('/auth', auth);
 
 
 app.get('/auth/linkedin', passport.authenticate('linkedin'));
