@@ -49,9 +49,6 @@ router.get('/c01_breast', (req, res, next) => {
     res.send(array);
     });
 
-  });
-});
-
 router.get('/c01_breast', (req, res, next) => {
   var array = [];
   var ninetyPlus = [];
@@ -65,7 +62,7 @@ router.get('/c01_breast', (req, res, next) => {
   Modules.c01_breast().then(function (data) {
       array.push(moment(data[0].enrollment));
 
-  }
+
   // Promise.all([ninetyPlus, sixtyToNinety, thirtyToSixty, thirtyLess, overThirtyLess, overThirtyToSixty, overSixtyToNinety, overNinety]).then(function (data) {
   //   array = [
   //     {title: 'Breast Cancer Screening'},

@@ -10,9 +10,9 @@ const cookieSession = require('cookie-session');
 const methodOverride = require('method-override');
 const knex = require('./db/knex.js');
 const routes = require('./routes/index');
-const users = require('./routes/users');
 const landing = require('./routes/landing');
-const patientData = require('./routes/patientData');
+const addPatient = require('./routes/add_patient');
+const editPatient = require('./routes/edit_patient');
 const reports = require('./routes/reports');
 const LinkedInStrategy = require('passport-linkedin-oauth2').Strategy;
 
@@ -72,17 +72,16 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(function (req, res, next) {
   res.locals.user = req.user;
-  console.log("PIC: " + req.user.photo);
   next();
 });
 
 app.use(methodOverride('_method'));
 app.use('/', routes);
-app.use('/users', users);
 app.use('/logout', logout);
 app.use('/login', login);
 app.use('/landing', landing);
-app.use('/patientData', patientData);
+app.use('/add_patient', addPatient);
+app.use('/edit_patient', editPatient);
 app.use('/reports', reports);
 
 

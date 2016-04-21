@@ -8,24 +8,13 @@ block content
       div.landingDiv
         p.icon 
           i(class="fa fa-users" aria-hidden="true")
-        p Add patient data  
-        p or 
-        p upload .CSV
-        p #{error}
-        form.adminLogin(action='/patientData' method='post')
-          div.form-group
-            label(for="username") Username
-            input.form-control(type="text" id="username" name="username" value= '' placeholder="Enter username...")
-          div.form-group
-            label(for="password") Password
-            input.form-control(type="password" id="password" name="password" value= '' placeholder="Enter password...")
-          div.form-group
-
-              a.btn.btn-primary(href="/patientData" role="button") Login
         p.landingDivText Add new patient data or Access Existing Patient Data
+        p.landingDivText #{error}
         a.btn.btn-primary.center-block.addNewButton(href="/add_patient" role="button" style="width:70%") Add New Patient
-          
-        a.btn.btn-primary.center-block(href="/edit_patient" role="button" style="width:70%") Edit Existing Patient
+        
+        form(action="/edit_patient", method="get")
+          input(type="text" name="patientId")
+          button.btn.btn-primary.center-block(type="submit" style="width:70%") Edit Existing Patient
       div.landingDiv
         p.icon
           i(class="fa fa-pie-chart" aria-hidden="true")
@@ -33,7 +22,3 @@ block content
         br
         br  
         a.btn.btn-primary.center-block(href="/reports" role="button" style="width:70%") Generate Reports
-        
-      
-      
-  

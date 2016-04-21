@@ -7,8 +7,13 @@ router.get('/', function(req, res, next) {
   if(req.user) {
         res.render('landing', { company: "SNP" });
   } else {
-    res.render('/login', { error: "You need to validate through LinkedIn" });
+    res.redirect('/login', { error: "You need to validate through LinkedIn" });
   }
 });
+
+router.post('/', (req, res, next)=> {
+
+    res.render('edit')
+  })
 
 module.exports = router;
