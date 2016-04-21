@@ -3,20 +3,6 @@ var router = express.Router();
 var moment = require('moment');
 const knex = require('../db/knex.js');
 const Modules = require('../db/modules.js');
-// const yearAgo = new Date();
-//     yearAgo.setDate(yearAgo.getDate()-365);
-// const thirty = new Date();
-//     thirty.setDate(thirty.getDate()-335);
-// const sixty = new Date();
-//     sixty.setDate(sixty.getDate()-305);
-// const ninety = new Date();
-//     ninety.setDate(ninety.getDate()-275);
-// const thirtyOver = new Date();
-//     thirtyOver.setDate(thirtyOver.getDate()-395);
-// const sixtyOver = new Date();
-//     sixtyOver.setDate(sixtyOver.getDate()-425);
-// const ninetyOver = new Date();
-//     ninetyOver.setDate(ninetyOver.getDate()-455);
 
 router.get('/', (req, res, next)=> {
     res.render('reports', {title: 'Reports'});
@@ -43,14 +29,6 @@ router.get('/initial_hra', (req, res, next) => {
   });
 });
 
-router.get('/c01_breast', (req, res, next) => {
-    array = [];
-    console.log();
-    res.send(array);
-    });
-
-  });
-});
 
 router.get('/c01_breast', (req, res, next) => {
   var array = [];
@@ -63,23 +41,62 @@ router.get('/c01_breast', (req, res, next) => {
   var overSixtyToNinety = [];
   var overNinety = [];
   Modules.c01_breast().then(function (data) {
-      array.push(moment(data[0].enrollment));
-
+    for (var i = 0; i < data.length; i++) {
+      var patient = data[i];
+      var patientE = patient.enrollment;
+      var patientB = patient.c01_breast;
+      if (patientE < moment().subtract(1, 'y')) {
+      patientE = moment(patientE).set('year', 2015);
+      }
+      if (moment(patientB).isBetween(moment().subtract(1, 'y'), moment()))   { ninetyPlus.push(patient);
+      } else if (moment(patientE).isAfter(moment().subtract(275, 'd')) && patientB === null) {
+        ninetyPlus.push(patient);
+      } else if (moment(patientE).isAfter(moment().subtract(305, 'd')) && patientB === null) {
+        sixtyToNinety.push(patient);
+      } else if (moment(patientE).isAfter(moment().subtract(335, 'd')) && patientB === null) {
+        thirtyToSixty.push(patient);
+      } else if (moment(patientE).isAfter(moment().subtract(1, 'y')) && patientB === null) {
+        thirtyLess.push(patient);
+      } else if (moment(patientE).isAfter(moment().subtract(395, 'd')) && patientB === null) {
+        overThirtyLess.push(patient);
+      } else if (moment(patientE).isAfter(moment().subtract(425, 'd')) && patientB === null) {
+        overThirtyToSixty.push(patient);
+      } else if (moment(patientE).isAfter(moment().subtract(455, 'd')) && patientB === null) {
+        overSixtyToNinety.push(patient);
+      } else if (moment(patientE).isSameOrBefore(moment().subtract(455, 'd')) && patientB === null) {
+        overNinety.push(patient);
+      }  else if (moment(patientB).isBetween(moment(patientE).add(30, 'd'), moment())){
+        thirtyLess.push(patient);
+      } else if (moment(patientB).isBetween(moment(patientE).add(60, 'd'), moment())){
+        thirtyToSixty.push(patient);
+      } else if (moment(patientB).isBetween(moment(patientE).add(90, 'd'), moment())){
+        sixtyToNinety.push(patient);
+      } else if (moment(patientB).isBetween(moment(patientE), moment())){
+        ninetyPlus.push(patient);
+      } else if (moment(patientB).isBetween(moment(patientE).subtract(30, 'd'), moment())){
+        overThirtyLess.push(patient);
+      } else if (moment(patientB).isBetween(moment(patientE).subtract(60, 'd'), moment())){
+        overThirtyToSixty.push(patient);
+      } else if (moment(patientB).isBetween(moment(patientE).subtract(90, 'd'), moment())){
+        overSixtyToNinety.push(patient);
+      } else if (moment(patientB).isSameOrBefore(moment(patientE).subtract(90, 'd'), moment())){
+        overNinety.push(patient);
+      }
   }
-  // Promise.all([ninetyPlus, sixtyToNinety, thirtyToSixty, thirtyLess, overThirtyLess, overThirtyToSixty, overSixtyToNinety, overNinety]).then(function (data) {
-  //   array = [
-  //     {title: 'Breast Cancer Screening'},
-  //     {label: 'More than 90 Days', count: ninetyPlus.length},
-  //     {label: 'Between 90 and 60 Days', count: sixtyToNinety.length},
-  //     {label: 'Between 60 and 30 Days', count: thirtyToSixty.length},
-  //     {label: 'Less than 30 Days', count: thirtyLess.length},
-  //     {label: 'Overdue less than 30 Days', count: overThirtyLess.length},
-  //     {label: 'Overdue between 30 and 60 Days', count: overThirtyToSixty.length},
-  //     {label: 'Overdue between 60 and 90 Days', count: overSixtyToNinety.length},
-  //     {label: 'Overdue more than 90 Days', count: overNinety.length},
-  //   ];
+  Promise.all([ninetyPlus, sixtyToNinety, thirtyToSixty, thirtyLess, overThirtyLess, overThirtyToSixty, overSixtyToNinety, overNinety]).then(function (data) {
+    array = [
+      {title: 'Breast Cancer Screening'},
+      {label: 'More than 90 Days', count: ninetyPlus.length},
+      {label: 'Between 90 and 60 Days', count: sixtyToNinety.length},
+      {label: 'Between 60 and 30 Days', count: thirtyToSixty.length},
+      {label: 'Less than 30 Days', count: thirtyLess.length},
+      {label: 'Overdue less than 30 Days', count: overThirtyLess.length},
+      {label: 'Overdue between 30 and 60 Days', count: overThirtyToSixty.length},
+      {label: 'Overdue between 60 and 90 Days', count: overSixtyToNinety.length},
+      {label: 'Overdue more than 90 Days', count: overNinety.length},
+    ];
     res.send(array);
-    // });
+    });
   });
 });
 
