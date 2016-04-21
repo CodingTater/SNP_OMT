@@ -305,17 +305,14 @@ exports.seed = function(knex, Promise) {
     ['Philippe', 'Charlott', 'Female', 76, 'Gunter', '20160416', null, 'false', 'false', 'false', 'false', 'true', 'false', 'true']
   ];
 
-  
-  const temp = function() {
-    for (var i = 0; i < val.length; i++) {
-      knex('patients').insert({ last: val[i][0], first: val[i][1], gender: val[i][2], age: val[i][3], pcp: val[i][4], enrollment: val[i][5], disenrollment: val[i][6], diabetes: val[i][7], osteoporosis: val[i][8], cancer: val[i][9], copd: val[i][10, esrd: val[i][11], heart: val[i][12], fracture: val[i][13] })
-    }
+
+  var inserts = [];
+  for (var i = 0; i < val.length; i++) {
+    inserts.push(knex('patients').insert({ last: val[i][0], first: val[i][1], gender: val[i][2], age: val[i][3], pcp: val[i][4], enrollment: val[i][5], disenrollment: val[i][6], diabetes: val[i][7], osteoporosis: val[i][8], cancer: val[i][9], copd: val[i][10], esrd: val[i][11], heart: val[i][12], fracture: val[i][13] }));
   }
 
   return Promise.join(
-    // Deletes ALL existing entries
     knex('patients').del(),
-    temp();
-  return Promise.all(temp)
+    inserts
   );
 };
