@@ -31,16 +31,16 @@ router.get('/initial_hra', (req, res, next) => {
 
 
 router.get('/c01_breast', (req, res, next) => {
-  var array = [];
-  var ninetyPlus = [];
-  var sixtyToNinety = [];
-  var thirtyToSixty = [];
-  var thirtyLess = [];
-  var overThirtyLess = [];
-  var overThirtyToSixty = [];
-  var overSixtyToNinety = [];
-  var overNinety = [];
   Modules.c01_breast().then(function (data) {
+    var array = [];
+    var ninetyPlus = [];
+    var sixtyToNinety = [];
+    var thirtyToSixty = [];
+    var thirtyLess = [];
+    var overThirtyLess = [];
+    var overThirtyToSixty = [];
+    var overSixtyToNinety = [];
+    var overNinety = [];
     for (var i = 0; i < data.length; i++) {
       var patient = data[i];
       var patientE = patient.enrollment;
@@ -80,6 +80,8 @@ router.get('/c01_breast', (req, res, next) => {
       } else if (moment(patientB).isBetween(moment(patientE).subtract(90, 'd'), moment())){
         overSixtyToNinety.push(patient);
       } else if (moment(patientB).isSameOrBefore(moment(patientE).subtract(90, 'd'), moment())){
+        overNinety.push(patient);
+      } else {
         overNinety.push(patient);
       }
   }
