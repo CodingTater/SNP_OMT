@@ -5,7 +5,7 @@
       $('.patientFields').css('display', 'none');
 
       $(this).css('background-color', '#D6D6D6');
-      $('.' + $(this).attr('id')).css('display', 'flex');
+      $('.' + $(this).attr('id')).css('display', 'inline');
     });
 
     $('#continue-perInfo').on('click', function() {
@@ -13,7 +13,7 @@
       $('.personInfo').css('display', 'none');
 
       $('#planType').css('background-color', '#D6D6D6');
-      $('.planType').css('display', 'flex');
+      $('.planType').css('display', 'inline');
     });
 
     $('#continue-planInfo').on('click', function() {
@@ -21,7 +21,7 @@
       $('.planType').css('display', 'none');
 
       $('#healthIssues').css('background-color', '#D6D6D6');
-      $('.healthIssues').css('display', 'flex');
+      $('.healthIssues').css('display', 'inline');
     });
 
     $('#continue-hInfo').on('click', function() {
