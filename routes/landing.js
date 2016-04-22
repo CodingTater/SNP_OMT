@@ -7,7 +7,7 @@ router.get('/', function(req, res, next) {
   if(req.user) {
         res.render('landing', { company: "Fortified Health" });
   } else {
-    res.redirect('/login', { error: "You need to validate through LinkedIn" });
+    res.redirect('/');
   }
 });
 
