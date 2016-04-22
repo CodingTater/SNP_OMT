@@ -13,8 +13,8 @@
     request.done(function(data) {
       $('.chart').find('svg').first().remove();
 
-      drawGraph(data);
-      //tableData = data.table;
+      drawGraph(data.graph);
+      tableData = data.table;
     });
 
     request.error(function(error) {
@@ -41,11 +41,13 @@
 
     data.forEach(function(obj) {
       var patientId = $('<td>' + obj.id + '</td>');
+      var lastName = $('<td>' + obj.last + '</td>');
       var pcp = $('<td>' + obj.pcp + '</td>');
       var row = $('<tr>');
 
       tableBody.append(row);
       row.append(patientId);
+      row.append(lastName);
       row.append(pcp);
     });
   };
