@@ -50,5 +50,18 @@ module.exports = {
   },
   c14_betus_kidneycare: function () {
     return knex('patients').innerJoin('measures', 'patients.id', 'measures.patient_id').select().where('patients.diabetes', true);
-  }
-}
+  },
+
+    users:  function users() {
+     return knex('users');
+   },
+
+   patients: function patients() {
+     return knex('patients');
+   },
+
+   measures: function measures() {
+     return knex('measures');
+   }
+   
+ }
