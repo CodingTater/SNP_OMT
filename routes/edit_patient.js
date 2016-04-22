@@ -71,18 +71,6 @@ router.put('/:id', (req, res, next)=> {
     newData.c14_betus_kidneycare = req.body.C14BetusKidney;
   }
 
-
-    //   initial_hra: req.body.initHRA,
-    //   recent_hra: req.body.recentHRA,
-    //   initial_icp: req.body.initICP,
-    //   recent_icp: req.body.recentICP,
-    //   c01_breast: req.body.C01Breast,
-    //   c02_cancer: req.body.C02Cancer,
-    //   c03_flu_vac: req.body.C03FluVac,
-    //   c12_osteoporosis: req.body.C12Osteo,
-    //   c13_betus_eyecare: req.body.C13BetusEye,
-    //   c14_betus_kidneycare: req.body.C14BetusKidney
-    // }
   const actions = mods.measures().update(newData).where({ patient_id: req.params.id });
   Promise.all([actions, enroll]).then(() => {
     res.redirect('/landing');

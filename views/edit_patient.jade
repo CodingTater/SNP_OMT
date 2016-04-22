@@ -25,10 +25,11 @@ block content
         h3.menuSelect.menu(id='healthIssues') 3. Health Issues
         h3.menuSelect.menu(id='measures') 4. Measures  
         h3.menuSelect.menu(id='measures2') 5. Measures Cont.
+        
+      form(action='/edit_patient/' + patient.id + '?_method=delete' method="post")
+        button.btn.btn-danger.delete(type='submit' value='delete') DELETE 
 
       div.pane  
-        form(action='/edit_patient/' + patient.id + '?_method=delete' method="post")
-          button.btn.btn-danger(type='submit' value='delete') DELETE 
         form(action='/edit_patient/' + patient.id + "?_method=put" method='post' role='form')
           .personInfo.patientFields
             .form-group
@@ -38,10 +39,10 @@ block content
               label(for='first') First Name
               input.form-control(type='text' id='first' name='first' value=patient.first)
               .radio-inline
-                input(type='radio', id='male', name='gender' value=patient.gender)    
+                input(type='radio', id='male', name='gender' value=patient.gender checked=patient.gender="Male")    
                 label(for='gender') Male
               .radio-inline
-                input(type='radio', id='female', name='gender' value=patient.gender)    
+                input(type='radio', id='female', name='gender' value=patient.gender checked=patient.gender="Female")    
                 label(for='gender') Female
             .form-group
               label(for='age') Age
