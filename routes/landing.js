@@ -11,5 +11,9 @@ router.get('/', function(req, res, next) {
   }
 });
 
+router.get('/', (req, res, next) => {
+  res.render('landing');
+});
+
 
 module.exports = router;

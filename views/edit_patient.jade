@@ -25,10 +25,10 @@ block content
         h3.menuSelect.menu(id='healthIssues') 3. Health Issues
         h3.menuSelect.menu(id='measures') 4. Measures  
         h3.menuSelect.menu(id='measures2') 5. Measures Cont.
+        
       form(action='/edit_patient/' + patient.id + '?_method=delete' method="post")
-        button.btn.btn-danger(type='submit' value='delete') DELETE 
+        button.btn.btn-danger.delete(type='submit' value='delete') DELETE 
 
-      
       div.pane  
         form(action='/edit_patient/' + patient.id + "?_method=put" method='post' role='form')
           .personInfo.patientFields
@@ -39,10 +39,10 @@ block content
               label(for='first') First Name
               input.form-control(type='text' id='first' name='first' value=patient.first)
               .radio-inline
-                input(type='radio', id='male', name='gender' value=patient.gender checked=patient.gender == "Male")    
+                input(type='radio', id='male', name='gender' value=patient.gender checked=patient.gender="Male")    
                 label(for='gender') Male
               .radio-inline
-                input(type='radio', id='female', name='gender' value=patient.gender checked=patient.gender == "Female")    
+                input(type='radio', id='female', name='gender' value=patient.gender checked=patient.gender="Female")    
                 label(for='gender') Female
             .form-group
               label(for='age') Age
@@ -66,36 +66,36 @@ block content
               .checkbox  
                 label
                   input(type='checkbox' id='dia' class='health'
-                  name="diabetes" value=patient.diabetes checked=patient.diabetes)
+                  name="diabetes" value=patient.diabetes)
                   | Diabetes
               .checkbox    
                 label 
-                  input.bigBox(type="checkbox", id='osteo' class='health' name="osteoporosis" value=patient.osteoporosis checked=patient.osteoporosis)
+                  input.bigBox(type="checkbox", id='osteo' class='health' name="osteoporosis" value=patient.osteoporosis)
                   |Osteoporosis
               .checkbox    
                 label(for='cancer')
                   input(type="checkbox", id='cancer' class='health'
-                  name="cancer" value=patient.osteoporosis checked=patient.osteoporosis)
+                  name="cancer" value=patient.osteoporosis)
                   |Cancer
               .checkbox
                 label(for='copd')              
                   input(type='checkbox', id='copd' class='health'
-                  name='copd' value=patient.copd checked=patient.copd)
+                  name='copd' value=patient.copd)
                   |COPD
               .checkbox    
                 label(for='esrd')
                   input(type='checkbox', id='esrd' class='health'
-                  name='esrd' value=patient.esrd checked=patient.esrd)
+                  name='esrd' value=patient.esrd)
                   |ESRD  
               .checkbox
                 label(for='heart')
                   input(type='checkbox', id='heart', class='health'
-                  name='heart' value=patient.heart checked=patient.heart)
+                  name='heart' value=patient.heart)
                   |Heart Attack
               .checkbox
                 label(for='fracture')    
                   input(type='checkbox' id='fracture' class='fracture'
-                  name='fracture' value=patient.fracture checked=patient.fracture)
+                  name='fracture' value=patient.fracture)
                   |Fracture
             button.btn.btn-primary(type='button' id='continue-hInfo') Continue
 

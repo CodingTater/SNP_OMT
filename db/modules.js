@@ -11,6 +11,25 @@ var pgFormatDate = function(date)  {
 };
 
 module.exports = {
+  users:  function users() {
+   return knex('users');
+   },
+
+   patients: function patients() {
+     return knex('patients');
+   },
+
+   measures: function measures() {
+     return knex('measures');
+   },
+
+   initialHRA: function initialHRA() {
+     return knex('patients').join('measures', 'measures.patient_id', 'patients.id').select('measures.initial_hra', 'patients.enrollment');
+   },
+
+   enrollment: function enrollment() {
+     return knex('patients').select('disenrollment');
+   },
 
   c01_breast: function () {
     return knex('patients').innerJoin('measures', 'patients.id', 'measures.patient_id').select().where('patients.gender', 'Female');
