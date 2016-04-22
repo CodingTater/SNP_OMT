@@ -11,13 +11,28 @@ router.get('/', function(req, res, next) {
     }
 });
 
-router.get('add_patient', (req, res, next)=> {
-  Modules.patients().where({ id : req.params.id });
-  res.render('add_patient', { user: req.user.name });
-});
-
-router.post('/add_patient', (req, res, next)=> {
-  Modules.patients().insert({ last: req.body.last, first: req.body.first, gender: req.body.gender, age: req.body.age, pcp: req.body.pcp, enrollment: req.body.enroll, disenrollment: req.body.disenroll, diabetes: req.body.diabetes, osteoporosis: req.body.osteoporosis, cancer: req.body.cancer, copd: req.body.copd, esrd: req.body.esrd, heart: req.body.heart, fracture: req.body.fracture });
+router.post('/', (req, res, next)=> {
+  Modules.patients().insert({
+    last: req.body.last,
+    first: req.body.first,
+    gender: req.body.gender,
+    age: req.body.age,
+    pcp: req.body.pcp,
+    enrollment: req.body.enroll,
+    diabetes: req.body.diabetes,
+    osteoporosis: req.body.osteoporosis,
+    cancer: req.body.cancer,
+    copd: req.body.copd,
+    esrd: req.body.esrd,
+    heart: req.body.heart,
+    fracture: req.body.fracture
+  }, '*').then((person)=> {
+    Modules.measures().insert({
+      patient_id: JSON.stringify(person[0].id)
+    }).then(()=> {
+      res.render('landing', { company: "Fortified Health" });
+    })
+  });
 });
 
 

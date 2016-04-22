@@ -13,8 +13,8 @@ block content
         h3
           a(href='#') Logout
         div.userInfo
-          img(src='../images/prince.jpg' width='60px')
-          p Alex Votry
+          img(src=user.photo width='60px')
+          p #{user.name}
     div.userContainer
       div.landingDiv
         p.icon 
@@ -22,9 +22,8 @@ block content
         p.landingDivText Add new patient data or Access Existing Patient Data
         p.landingDivText #{error}
         a.btn.btn-primary.center-block.addNewButton(href="/add_patient" role="button" style="width:70%") Add New Patient
-        
         form(action="/edit_patient", method="get")
-          input(type="text" name="patientId")
+          input(type="text" name="patientId" placeholder="enter patient ID")
           button.btn.btn-primary.center-block(type="submit" style="width:70%") Edit Existing Patient
       div.landingDiv
         p.icon

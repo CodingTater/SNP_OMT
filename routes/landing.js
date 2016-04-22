@@ -5,10 +5,11 @@ const Modules = require('../db/modules');
 
 router.get('/', function(req, res, next) {
   if(req.user) {
-        res.render('landing', { company: "SNP" });
+        res.render('landing', { company: "Fortified Health" });
   } else {
     res.redirect('/login', { error: "You need to validate through LinkedIn" });
   }
 });
+
 
 module.exports = router;
