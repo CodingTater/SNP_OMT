@@ -8,27 +8,6 @@ router.get('/', (req, res, next)=> {
     res.render('reports', {title: 'Reports'});
 });
 
-
-router.get('/initial_hra', (req, res, next) => {
-  var array = [];
-  var iHraSixtyPlusDays = Modules.iHraSixtyPlusDays();
-  var iHraThirtyToSixty = Modules.iHraThirtyToSixty();
-  var iHraNextThirtyDays = Modules.iHraNextThirtyDays();
-  var iHraOverDue = Modules.iHraOverDue();
-
-  Promise.all([iHraSixtyPlusDays, iHraThirtyToSixty, iHraThirtyToSixty, iHraOverDue]).then(function (data) {
-    array = [
-      {title: 'Initial HRA'},
-
-      {label: 'More than 60 Days', count: data[0].length},
-      {label: 'More than 30 Days', count: data[1].length},
-      {label: 'Less than 30 Days', count: data[2].length},
-      {label: 'Overdue', count: data[3].length},
-    ];
-    res.send(array);
-  });
-});
-
 router.get('/c01_breast', (req, res, next) => {
   Modules.c01_breast().then(function (data) {
 
@@ -40,6 +19,8 @@ router.get('/c01_breast', (req, res, next) => {
     var overThirtyToSixty = [];
     var overSixtyToNinety = [];
     var overNinety = [];
+    var tableArray = [];
+    var arrayOfDueDates = [];
 
     for (var i = 0; i < data.length; i++) {
       var patient = data[i];
@@ -86,18 +67,27 @@ router.get('/c01_breast', (req, res, next) => {
       }
   }
 
-    var array = [
+    var graphArray = [
       {title: 'Breast Cancer Screening'},
-      {label: 'More than 90 Days', count: ninetyPlus.length},
-      {label: 'Between 90 and 60 Days', count: sixtyToNinety.length},
-      {label: 'Between 60 and 30 Days', count: thirtyToSixty.length},
-      {label: 'Less than 30 Days', count: thirtyLess.length},
-      {label: 'Overdue less than 30 Days', count: overThirtyLess.length},
-      {label: 'Overdue between 30 and 60 Days', count: overThirtyToSixty.length},
-      {label: 'Overdue between 60 and 90 Days', count: overSixtyToNinety.length},
-      {label: 'Overdue more than 90 Days', count: overNinety.length},
+      {label: 'More than 90 Days', count: ninetyPlus.length, id: 'c01'},
+      {label: 'Between 90 and 60 Days', count: sixtyToNinety.length, id: 'c02'},
+      {label: 'Between 60 and 30 Days', count: thirtyToSixty.length, id: 'c03'},
+      {label: 'Less than 30 Days', count: thirtyLess.length, id: 'c04'},
+      {label: 'Overdue less than 30 Days', count: overThirtyLess.length, id: 'c05'},
+      {label: 'Overdue between 30 and 60 Days', count: overThirtyToSixty.length, id: 'c06'},
+      {label: 'Overdue between 60 and 90 Days', count: overSixtyToNinety.length, id: 'c07'},
+      {label: 'Overdue more than 90 Days', count: overNinety.length, id: 'c08'},
     ];
-    res.send(array);
+
+    var arrayOfDueDates = [ninetyPlus, sixtyToNinety, thirtyToSixty, thirtyLess, overThirtyLess, overThirtyToSixty, overSixtyToNinety, overNinety];
+
+    for (var i = 1; i < graphArray.length; i++) {
+      var key = graphArray[i].id;
+      var object = {};
+      object[key] = arrayOfDueDates[i-1];
+      tableArray.push(object);
+    };
+    res.send({ graph: graphArray, table: tableArray});
   });
 });
 
@@ -112,6 +102,8 @@ router.get('/c02_cancer', (req, res, next) => {
     var overThirtyToSixty = [];
     var overSixtyToNinety = [];
     var overNinety = [];
+    var tableArray = [];
+    var arrayOfDueDates = [];
 
     for (var i = 0; i < data.length; i++) {
       var patient = data[i];
@@ -157,18 +149,27 @@ router.get('/c02_cancer', (req, res, next) => {
         overNinety.push(patient);
       }
   }
-    var array = [
+    var graphArray = [
       {title: 'Colorectal Cancer Screening'},
-      {label: 'More than 90 Days', count: ninetyPlus.length},
-      {label: 'Between 90 and 60 Days', count: sixtyToNinety.length},
-      {label: 'Between 60 and 30 Days', count: thirtyToSixty.length},
-      {label: 'Less than 30 Days', count: thirtyLess.length},
-      {label: 'Overdue less than 30 Days', count: overThirtyLess.length},
-      {label: 'Overdue between 30 and 60 Days', count: overThirtyToSixty.length},
-      {label: 'Overdue between 60 and 90 Days', count: overSixtyToNinety.length},
-      {label: 'Overdue more than 90 Days', count: overNinety.length},
+      {label: 'More than 90 Days', count: ninetyPlus.length, id: 'c01'},
+      {label: 'Between 90 and 60 Days', count: sixtyToNinety.length, id: 'c02'},
+      {label: 'Between 60 and 30 Days', count: thirtyToSixty.length, id: 'c03'},
+      {label: 'Less than 30 Days', count: thirtyLess.length, id: 'c04'},
+      {label: 'Overdue less than 30 Days', count: overThirtyLess.length, id: 'c05'},
+      {label: 'Overdue between 30 and 60 Days', count: overThirtyToSixty.length, id: 'c06'},
+      {label: 'Overdue between 60 and 90 Days', count: overSixtyToNinety.length, id: 'c07'},
+      {label: 'Overdue more than 90 Days', count: overNinety.length, id: 'c08'},
     ];
-    res.send(array);
+
+      var arrayOfDueDates = [ninetyPlus, sixtyToNinety, thirtyToSixty, thirtyLess, overThirtyLess, overThirtyToSixty, overSixtyToNinety, overNinety];
+
+      for (var i = 1; i < graphArray.length; i++) {
+        var key = graphArray[i].id;
+        var object = {};
+        object[key] = arrayOfDueDates[i-1];
+        tableArray.push(object);
+      };
+    res.send({ graph: graphArray, table: tableArray});
   });
 });
 
@@ -183,6 +184,8 @@ router.get('/c03_flu_vac', (req, res, next) => {
     var overThirtyToSixty = [];
     var overSixtyToNinety = [];
     var overNinety = [];
+    var tableArray = [];
+    var arrayOfDueDates = [];
 
     for (var i = 0; i < data.length; i++) {
       var patient = data[i];
@@ -228,18 +231,27 @@ router.get('/c03_flu_vac', (req, res, next) => {
         overNinety.push(patient);
       }
   }
-    var array = [
+    var graphArray = [
       {title: 'Flu Vaccines'},
-      {label: 'More than 90 Days', count: ninetyPlus.length},
-      {label: 'Between 90 and 60 Days', count: sixtyToNinety.length},
-      {label: 'Between 60 and 30 Days', count: thirtyToSixty.length},
-      {label: 'Less than 30 Days', count: thirtyLess.length},
-      {label: 'Overdue less than 30 Days', count: overThirtyLess.length},
-      {label: 'Overdue between 30 and 60 Days', count: overThirtyToSixty.length},
-      {label: 'Overdue between 60 and 90 Days', count: overSixtyToNinety.length},
-      {label: 'Overdue more than 90 Days', count: overNinety.length},
+      {label: 'More than 90 Days', count: ninetyPlus.length, id: 'c01'},
+      {label: 'Between 90 and 60 Days', count: sixtyToNinety.length, id: 'c02'},
+      {label: 'Between 60 and 30 Days', count: thirtyToSixty.length, id: 'c03'},
+      {label: 'Less than 30 Days', count: thirtyLess.length, id: 'c04'},
+      {label: 'Overdue less than 30 Days', count: overThirtyLess.length, id: 'c05'},
+      {label: 'Overdue between 30 and 60 Days', count: overThirtyToSixty.length, id: 'c06'},
+      {label: 'Overdue between 60 and 90 Days', count: overSixtyToNinety.length, id: 'c07'},
+      {label: 'Overdue more than 90 Days', count: overNinety.length, id: 'c08'},
     ];
-    res.send(array);
+
+      var arrayOfDueDates = [ninetyPlus, sixtyToNinety, thirtyToSixty, thirtyLess, overThirtyLess, overThirtyToSixty, overSixtyToNinety, overNinety];
+
+      for (var i = 1; i < graphArray.length; i++) {
+        var key = graphArray[i].id;
+        var object = {};
+        object[key] = arrayOfDueDates[i-1];
+        tableArray.push(object);
+      };
+    res.send({ graph: graphArray, table: tableArray});
   });
 });
 
@@ -254,6 +266,8 @@ router.get('/c12_osteoporosis', (req, res, next) => {
     var overThirtyToSixty = [];
     var overSixtyToNinety = [];
     var overNinety = [];
+    var tableArray = [];
+    var arrayOfDueDates = [];
 
     for (var i = 0; i < data.length; i++) {
       var patient = data[i];
@@ -299,18 +313,26 @@ router.get('/c12_osteoporosis', (req, res, next) => {
         overNinety.push(patient);
       }
   }
-    var array = [
+    var graphArray = [
       {title: 'Osteoperosis Screening'},
-      {label: 'More than 90 Days', count: ninetyPlus.length},
-      {label: 'Between 90 and 60 Days', count: sixtyToNinety.length},
-      {label: 'Between 60 and 30 Days', count: thirtyToSixty.length},
-      {label: 'Less than 30 Days', count: thirtyLess.length},
-      {label: 'Overdue less than 30 Days', count: overThirtyLess.length},
-      {label: 'Overdue between 30 and 60 Days', count: overThirtyToSixty.length},
-      {label: 'Overdue between 60 and 90 Days', count: overSixtyToNinety.length},
-      {label: 'Overdue more than 90 Days', count: overNinety.length},
+      {label: 'More than 90 Days', count: ninetyPlus.length, id: 'c01'},
+      {label: 'Between 90 and 60 Days', count: sixtyToNinety.length, id: 'c02'},
+      {label: 'Between 60 and 30 Days', count: thirtyToSixty.length, id: 'c03'},
+      {label: 'Less than 30 Days', count: thirtyLess.length, id: 'c04'},
+      {label: 'Overdue less than 30 Days', count: overThirtyLess.length, id: 'c05'},
+      {label: 'Overdue between 30 and 60 Days', count: overThirtyToSixty.length, id: 'c06'},
+      {label: 'Overdue between 60 and 90 Days', count: overSixtyToNinety.length, id: 'c07'},
+      {label: 'Overdue more than 90 Days', count: overNinety.length, id: 'c08'},
     ];
-    res.send(array);
+    var arrayOfDueDates = [ninetyPlus, sixtyToNinety, thirtyToSixty, thirtyLess, overThirtyLess, overThirtyToSixty, overSixtyToNinety, overNinety];
+
+    for (var i = 1; i < graphArray.length; i++) {
+      var key = graphArray[i].id;
+      var object = {};
+      object[key] = arrayOfDueDates[i-1];
+      tableArray.push(object);
+    };
+  res.send({ graph: graphArray, table: tableArray});
   });
 });
 
@@ -325,6 +347,8 @@ router.get('/c13_betus_eyecare', (req, res, next) => {
     var overThirtyToSixty = [];
     var overSixtyToNinety = [];
     var overNinety = [];
+    var tableArray = [];
+    var arrayOfDueDates = [];
 
     for (var i = 0; i < data.length; i++) {
       var patient = data[i];
@@ -370,18 +394,26 @@ router.get('/c13_betus_eyecare', (req, res, next) => {
         overNinety.push(patient);
       }
   }
-    var array = [
+    var graphArray = [
       {title: 'Diabetic Eye Exams'},
-      {label: 'More than 90 Days', count: ninetyPlus.length},
-      {label: 'Between 90 and 60 Days', count: sixtyToNinety.length},
-      {label: 'Between 60 and 30 Days', count: thirtyToSixty.length},
-      {label: 'Less than 30 Days', count: thirtyLess.length},
-      {label: 'Overdue less than 30 Days', count: overThirtyLess.length},
-      {label: 'Overdue between 30 and 60 Days', count: overThirtyToSixty.length},
-      {label: 'Overdue between 60 and 90 Days', count: overSixtyToNinety.length},
-      {label: 'Overdue more than 90 Days', count: overNinety.length},
+      {label: 'More than 90 Days', count: ninetyPlus.length, id: 'c01'},
+      {label: 'Between 90 and 60 Days', count: sixtyToNinety.length, id: 'c02'},
+      {label: 'Between 60 and 30 Days', count: thirtyToSixty.length, id: 'c03'},
+      {label: 'Less than 30 Days', count: thirtyLess.length, id: 'c04'},
+      {label: 'Overdue less than 30 Days', count: overThirtyLess.length, id: 'c05'},
+      {label: 'Overdue between 30 and 60 Days', count: overThirtyToSixty.length, id: 'c06'},
+      {label: 'Overdue between 60 and 90 Days', count: overSixtyToNinety.length, id: 'c07'},
+      {label: 'Overdue more than 90 Days', count: overNinety.length, id: 'c08'},
     ];
-    res.send(array);
+    var arrayOfDueDates = [ninetyPlus, sixtyToNinety, thirtyToSixty, thirtyLess, overThirtyLess, overThirtyToSixty, overSixtyToNinety, overNinety];
+
+    for (var i = 1; i < graphArray.length; i++) {
+      var key = graphArray[i].id;
+      var object = {};
+      object[key] = arrayOfDueDates[i-1];
+      tableArray.push(object);
+    };
+  res.send({ graph: graphArray, table: tableArray});
   });
 });
 
@@ -396,6 +428,8 @@ router.get('/c14_betus_kidneycare', (req, res, next) => {
     var overThirtyToSixty = [];
     var overSixtyToNinety = [];
     var overNinety = [];
+    var tableArray = [];
+    var arrayOfDueDates = [];
 
     for (var i = 0; i < data.length; i++) {
       var patient = data[i];
@@ -441,18 +475,26 @@ router.get('/c14_betus_kidneycare', (req, res, next) => {
         overNinety.push(patient);
       }
   }
-    var array = [
+    var graphArray = [
       {title: 'Diabetic Kidney Exam'},
-      {label: 'More than 90 Days', count: ninetyPlus.length},
-      {label: 'Between 90 and 60 Days', count: sixtyToNinety.length},
-      {label: 'Between 60 and 30 Days', count: thirtyToSixty.length},
-      {label: 'Less than 30 Days', count: thirtyLess.length},
-      {label: 'Overdue less than 30 Days', count: overThirtyLess.length},
-      {label: 'Overdue between 30 and 60 Days', count: overThirtyToSixty.length},
-      {label: 'Overdue between 60 and 90 Days', count: overSixtyToNinety.length},
-      {label: 'Overdue more than 90 Days', count: overNinety.length},
+      {label: 'More than 90 Days', count: ninetyPlus.length, id: 'c01'},
+      {label: 'Between 90 and 60 Days', count: sixtyToNinety.length, id: 'c02'},
+      {label: 'Between 60 and 30 Days', count: thirtyToSixty.length, id: 'c03'},
+      {label: 'Less than 30 Days', count: thirtyLess.length, id: 'c04'},
+      {label: 'Overdue less than 30 Days', count: overThirtyLess.length, id: 'c05'},
+      {label: 'Overdue between 30 and 60 Days', count: overThirtyToSixty.length, id: 'c06'},
+      {label: 'Overdue between 60 and 90 Days', count: overSixtyToNinety.length, id: 'c07'},
+      {label: 'Overdue more than 90 Days', count: overNinety.length, id: 'c08'},
     ];
-    res.send(array);
+    var arrayOfDueDates = [ninetyPlus, sixtyToNinety, thirtyToSixty, thirtyLess, overThirtyLess, overThirtyToSixty, overSixtyToNinety, overNinety];
+
+    for (var i = 1; i < graphArray.length; i++) {
+      var key = graphArray[i].id;
+      var object = {};
+      object[key] = arrayOfDueDates[i-1];
+      tableArray.push(object);
+    };
+  res.send({ graph: graphArray, table: tableArray});
   });
 });
 
