@@ -30,7 +30,7 @@ router.post('/', (req, res, next)=> {
     Modules.measures().insert({
       patient_id: JSON.stringify(person[0].id)
     }).then(()=> {
-      res.render('landing', { company: "Fortified Health" });
+      res.redirect('landing', { company: "Fortified Health" });
     })
   });
 });

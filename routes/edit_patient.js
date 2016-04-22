@@ -1,24 +1,24 @@
 const express = require('express');
 const router = express.Router();
 const knex = require('../db/knex');
-const Modules = require('../db/modules');
+const mods = require('../db/modules');
 
 
 router.get('/', function(req, res, next) {
   if (req.user.admin === true) {
-    Modules.patients().where({ id: req.query.patientId}).first().then((record)=> {
-      Modules.measures().where({ patient_id: req.query.patientId }).first().then((actions)=> {
-      console.log(actions);
-      res.render('edit_patient', {patient: record, measure: actions });
+    const people = mods.patients().where({ id: req.query.patientId }).first();
+    const actions = mods.measures().where({ patient_id: req.query.patientId }).first();
+      Promise.all([people, actions]).then((both)=> {
+        console.log(both[1]);
+        res.render('edit_patient', {patient: both[0], measure: both[1] });
       });
-    });
   } else {
     res.render('landing', { error: "You need to have admin clearance for this" });
     }
-});
+  });
 
 router.put('/:id', (req, res, next)=> {
-  Modules.patients().update({
+  const people = mods.patients().update({
     last: req.body.last,
     first: req.body.first,
     gender: req.body.gender,
@@ -33,24 +33,28 @@ router.put('/:id', (req, res, next)=> {
     esrd: req.body.esrd,
     heart: req.body.heart,
     fracture: req.body.fracture
-  }).where({ id : req.params.id }).then(()=> {
-    Modules.measures().update({
-      initial_hra: initHRA,
-      recent_hra: recentHRA,
-      initial_icp: initICP,
-      recent_icp: recentICP,
-      c01_breast: C01Breast,
-      c02_cancer: C02Cancer,
-      c03_flu_vac: C03FluVac,
-      c12_osteoporosis: C12Osteo,
-      c13_betus_eyecare: C13BetusEye,
-      c14_betus_kidneycare: C14BetusKidney
-    })
-  })
+  }).where({ id : req.params.id });
+  const actions = mods.measures().update({
+      initial_hra: req.body.initHRA,
+      recent_hra: req.body.recentHRA,
+      initial_icp: req.body.initICP,
+      recent_icp: req.body.recentICP,
+      c01_breast: req.body.C01Breast,
+      c02_cancer: req.body.C02Cancer,
+      c03_flu_vac: req.body.C03FluVac,
+      c12_osteoporosis: req.body.C12Osteo,
+      c13_betus_eyecare: req.body.C13BetusEye,
+      c14_betus_kidneycare: req.body.C14BetusKidney
+    }).where({ paitent_id: req.parems.id });
+  Promise.all([people, actions]).then(() => {
+    res.redirect('landing', { patient: both[0], measure: both[1] });
+  });
 });
 
-router.delete('/:id', (req, res, next)=> {
-  Modules.patients().delete().where({ id: req.params.id });
+router.delete('/:id', (req, res, next) => {
+  mods.patients().delete().where({ id: req.params.id }).then(()=> {
+    res.redirect('landing');
+  });
 });
 
 

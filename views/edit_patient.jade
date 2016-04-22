@@ -48,7 +48,9 @@ block content
             .form-group
               label(for='pcp') Primary Care Provider
               input.form-control(type='text' id='pcp' name='pcp' value=patient.pcp)    
-            button.btn.btn-primary(type='button' id='continue-perInfo') Continue    
+            button.btn.btn-primary(type='button' id='continue-perInfo') Continue  
+            //- form(action='/edit_patient/' + #{patient.id} + '?_method=delete' method="post")
+              button.btn.btn-danger(script='console.log(#{patient.id});'type='button' value='delete') DELETE 
         
           .planType.patientFields
             .form-group
