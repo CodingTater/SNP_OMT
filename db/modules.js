@@ -32,7 +32,7 @@ var newEnrollees = function(data) {
 };
 
 module.exports = {
-  
+
   c01_breast: function () {
     return knex('patients').innerJoin('measures', 'patients.id', 'measures.patient_id').select().where('patients.gender', 'Female');
   },

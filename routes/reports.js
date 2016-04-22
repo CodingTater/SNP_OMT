@@ -93,7 +93,6 @@ router.get('/c01_breast', (req, res, next) => {
 
 router.get('/c02_cancer', (req, res, next) => {
   Modules.c02_cancer().then(function (data) {
-
     var ninetyPlus = [];
     var sixtyToNinety = [];
     var thirtyToSixty = [];
@@ -175,7 +174,6 @@ router.get('/c02_cancer', (req, res, next) => {
 
 router.get('/c03_flu_vac', (req, res, next) => {
   Modules.c03_flu_vac().then(function (data) {
-
     var ninetyPlus = [];
     var sixtyToNinety = [];
     var thirtyToSixty = [];
