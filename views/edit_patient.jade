@@ -9,54 +9,56 @@ block content
         h3 
           a(href='/landing') Home
         h3  
-          a(href='#') Reports
+          a(href='/reports') Reports
         h3
-          a(href='#') Logout 
+          a(href='/') Logout 
         div.userInfo
-          img(src='../images/prince.jpg' width='60px')
-          p Alex Votry
+          img(src=user.photo width='60px')
+          p #{user.name}
           
     div.controlPanel
       div.pane
-        h2.leftFormTitle Patient Information
+        h2.leftFormTitle #{patient.first} #{patient.last} Information
 
         h3.menuSelect.menu(id='personInfo') 1. Personal Information
         h3.menuSelect.menu(id='planType') 2. Plan  
         h3.menuSelect.menu(id='healthIssues') 3. Health Issues
         h3.menuSelect.menu(id='measures') 4. Measures  
         h3.menuSelect.menu(id='measures2') 5. Measures Cont.
+      form(action='/edit_patient/' + patient.id + '?_method=delete' method="post")
+        button.btn.btn-danger(type='submit' value='delete') DELETE 
+
       
       div.pane  
-        form(action='#' _method='PATCH' method='post' role='form')
+        form(action='/edit_patient/' + patient.id + "?_method=put" method='post' role='form')
           .personInfo.patientFields
             .form-group
               label(for='last') Last Name
-              input.form-control(type='text' id='last' name='last')
+              input.form-control(type='text' id='last' name='last' value=patient.last)
             .form-group
               label(for='first') First Name
-              input.form-control(type='text' id='first' name='first')
+              input.form-control(type='text' id='first' name='first' value=patient.first)
               .radio-inline
-                input(type='radio', id='male', name='sex')    
-                label(for='sex') Male
+                input(type='radio', id='male', name='gender' value=patient.gender)    
+                label(for='gender') Male
               .radio-inline
-                input(type='radio', id='male', name='sex')    
-                label(for='sex') Female
+                input(type='radio', id='female', name='gender' value=patient.gender)    
+                label(for='gender') Female
             .form-group
               label(for='age') Age
-              input.form-control(type='text' id='last' name='last')
+              input.form-control(type='text' id='last' name='age' value=patient.age)
             .form-group
               label(for='pcp') Primary Care Provider
-              input.form-control(type='text' id='pcp' name='pcp')    
-            button.btn.btn-primary(id='continue-perInfo') Continue    
-    
+              input.form-control(type='text' id='pcp' name='pcp' value=patient.pcp)    
+            button.btn.btn-primary(type='button' id='continue-perInfo') Continue  
           .planType.patientFields
             .form-group
               label(for='enroll') Enrollment Date
-              input.form-control(type='date' id='enroll' name='enroll')
+              input.form-control(type='date' id='enroll' name='enroll' value=patient.enroll)
             .form-group
               label(for='disenroll') Disenrollment Date
-              input.form-control(type='date' id='disenroll' name='disenroll') 
-            button.btn.btn-primary(id='continue-planInfo') Continue
+              input.form-control(type='date' id='disenroll' name='disenroll' value=patient.disenroll) 
+            button.btn.btn-primary(type='button' id='continue-planInfo') Continue
         
           .healthIssues.patientFields
             h2 Patient Conditions
@@ -64,72 +66,72 @@ block content
               .checkbox  
                 label
                   input(type='checkbox' id='dia' class='health'
-                  name="diabetes" value="value")
+                  name="diabetes" value=patient.diabetes)
                   | Diabetes
               .checkbox    
                 label 
-                  input.bigBox(type="checkbox", id='osteo' class='health' name="osteoporosis" value="value")
-                  |Osteporosis
+                  input.bigBox(type="checkbox", id='osteo' class='health' name="osteoporosis" value=patient.osteoporosis)
+                  |Osteoporosis
               .checkbox    
                 label(for='cancer')
                   input(type="checkbox", id='cancer' class='health'
-                  name="cancer" value="value")
+                  name="cancer" value=patient.cancer)
                   |Cancer
               .checkbox
                 label(for='copd')              
                   input(type='checkbox', id='copd' class='health'
-                  name='copd' value='value')
+                  name='copd' value=patient.copd)
                   |COPD
               .checkbox    
                 label(for='esrd')
                   input(type='checkbox', id='esrd' class='health'
-                  name='copd' value='value')
+                  name='esrd' value=patient.esrd)
                   |ESRD  
               .checkbox
                 label(for='heart')
                   input(type='checkbox', id='heart', class='health'
-                  name='heart' value='value')
+                  name='heart' value=patient.heart)
                   |Heart Attack
               .checkbox
                 label(for='fracture')    
                   input(type='checkbox' id='fracture' class='fracture'
-                  name='fracture' value='value')
+                  name='fracture' value=patient.fracture)
                   |Fracture
-            button.btn.btn-primary(id='continue-hInfo') Continue
+            button.btn.btn-primary(type='button' id='continue-hInfo') Continue
 
           .measures.patientFields  
             .form-group
               label(for='initHRA') Initial HRA
-              input.form-control(type='date' id='initHRA' name='initHRA')
+              input.form-control(type='date' id='initHRA' name='initHRA' value=measure.initial_hra)
             .form-group  
               label(for='recentHRA') Recent HRA
-              input.form-control(type='date' id='recentHRA' name='recentHRA')
+              input.form-control(type='date' id='recentHRA' name='recentHRA' value=measure.recent_hra)
             .form-group  
               label(for='initICP') Initial ICP
-              input.form-control(type='date' id='initICP' name='initICP')
+              input.form-control(type='date' id='initICP' name='initICP' value=measure.initial_icp)
             .form-group  
               label(for='recentICP') Recent ICP
-              input.form-control(type='date' id='recentICP' name='recentICP')
-            button.btn.btn-primary(id='continue-measures') Continue
+              input.form-control(type='date' id='recentICP' name='recentICP' value=measure.recent_icp)
+            button.btn.btn-primary(type='button' id='continue-measures') Continue
           
           .measures2.patientFields  
             .form-group
               label(for='C01Breast') Breast Cancer Screening
-              input.form-control(type='date' id='C01Breast' name='C01Breast')
+              input.form-control(type='date' id='C01Breast' name='C01Breast' value=measure.c01_breast)
             .form-group  
               label(for='C02Cancer') Colorectal Screening
-              input.form-control(type='date' id='C02Cancer' name='C02Cancer')
+              input.form-control(type='date' id='C02Cancer' name='C02Cancer' value=measure.c02_cancer)
             .form-group  
               label(for='C03FluVac') Flu Vaccination
-              input.form-control(type='date' id='C03FluVac' name='C03FluVac')
+              input.form-control(type='date' id='C03FluVac' name='C03FluVac' value=measure.c03_flu_vac)
             .form-group  
               label(for='C12Osteo') Osteporosis Screening
-              input.form-control(type='date' id='C12Osteo' name='C12Osteo')
+              input.form-control(type='date' id='C12Osteo' name='C12Osteo' value=measure.c12_osteoporosis)
             .form-group  
               label(for='C13BetusEye') Diabetes Eye Care
-              input.form-control(type='date' id='C13BetusEye' name='C13BetusEye')
+              input.form-control(type='date' id='C13BetusEye' name='C13BetusEye' value=measure.c13_betus_eyecare)
             .form-group  
               label(for='C14BetusKidney') Diabetes Kidney Care
-              input.form-control(type='date' id='C14BetusKidney' name='C14BetusKidney')
+              input.form-control(type='date' id='C14BetusKidney' name='C14BetusKidney' value=measure.c14_betus_kidneycare)
             .form-group  
               button.btn.btn-default.btn-primary.col-xs-6(type='submit') Submit

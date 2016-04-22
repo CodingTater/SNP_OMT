@@ -4,7 +4,6 @@ const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const login = require('./routes/login');
-const logout = require('./routes/logout');
 const passport = require('passport');
 const cookieSession = require('cookie-session');
 const methodOverride = require('method-override');
@@ -77,7 +76,6 @@ app.use(function (req, res, next) {
 
 app.use(methodOverride('_method'));
 app.use('/', routes);
-app.use('/logout', logout);
 app.use('/login', login);
 app.use('/landing', landing);
 app.use('/add_patient', addPatient);
