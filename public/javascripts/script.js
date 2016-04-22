@@ -27,6 +27,17 @@
     $('#continue-hInfo').on('click', function() {
       $('#healthIssues').css('background-color', 'white');
       $('.healthIssues').css('display', 'none');
+
+      $('#measures').css('background-color', '#D6D6D6');
+      $('.measures').css('display', 'block');
+    });
+
+    $('#continue-measures').on('click', function() {
+      $('#measures').css('background-color', 'white');
+      $('.measures').css('display', 'none');
+
+      $('#measures2').css('background-color', '#D6D6D6');
+      $('.measures2').css('display', 'block');
     });
   });
 })();

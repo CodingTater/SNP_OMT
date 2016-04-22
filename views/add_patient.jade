@@ -1,89 +1,94 @@
 extends layout
 block content
-  .container-fluid
-    .row
-      header.col-xs-6  
-        img.logo2(src="http://blog.motorpocket.com/wp-content/uploads/2015/08/excess-protection.png")
-        h1 Fortified Health 
-      .nav.col-xs-6
-        a(href='/landing') Home
-        a(href= '#') Reports
-        a(href= '#') Logout
-    .row
-      .leftForm.col-xs-4.col-xs-offset-2
-        .row
-          h2 Patient Information
-        .row
-          h3.menuSelect.menu(id='personInfo') 1. Personal Information
-          h3.menuSelect.menu(id='planType') 2. Plan  
-          h3.menuSelect.menu(id='healthIssues') 3. Health Issues  
-      .rightForm.col-xs-4
-        form.patientFields.personInfo(action='#' role='form')
-          .form-group
-            label(for='last') Last Name
-            input.form-control(type='text' id='last' name='last')
-          .form-group
-            label(for='first') First Name
-            input.form-control(type='text' id='first' name='first')
-          .radio-inline
-            input(type='radio', id='male', name='sex')    
-            label(for='sex') Male
-          .radio-inline
-            input(type='radio', id='male', name='sex')    
-            label(for='sex') Female
-          .form-group
-            label(for='age') Age
-            input.form-control(type='text' id='last' name='last')
-          .form-group
-            label(for='pcp') Primary Care Provider
-            input.form-control(type='text' id='pcp' name='pcp')    
-        button.btn.btn-primary.personInfo.patientFields(id='continue-perInfo') Continue    
+  div.mainContainer
+    header
+      div.logo
+        img.logo2(src="http://www.clker.com/cliparts/N/5/f/c/9/D/blue-security-shield-md.png")
+        h1 Fortified Health
+      div.nav
+        h3 
+          a(href='landing') Home
+        h3  
+          a(href='#') Reports
+        h3
+          a(href='#') Logout 
+        div.userInfo
+          img(src=user.photo width='60px')
+          p #{user.name}
+          
+    div.controlPanel
+      div.pane
+        h2.leftFormTitle Patient Information
+
+        h3.menuSelect.menu(id='personInfo') 1. Personal Information
+        h3.menuSelect.menu(id='planType') 2. Plan  
+        h3.menuSelect.menu(id='healthIssues') 3. Health Issues
+      
+      div.pane  
+        form(action='/add_patient' method='post' role='form')
+          .personInfo.patientFields
+            .form-group
+              label(for='last') Last Name
+              input.form-control(type='text' id='last' name='last')
+            .form-group
+              label(for='first') First Name
+              input.form-control(type='text' id='first' name='first')
+              .radio-inline
+                input(type='radio', id='male', name='gender' value='male')    
+                label(for='sex') Male
+              .radio-inline
+                input(type='radio', id='female', name='gender' value='female')    
+                label(for='sex') Female
+            .form-group
+              label(for='age') Age
+              input.form-control(type='text' id='age' name='age')
+            .form-group
+              label(for='pcp') Primary Care Provider
+              input.form-control(type='text' id='pcp' name='pcp')    
+            button.btn.btn-primary(type='button' id='continue-perInfo') Continue    
         
-        .planType.patientFields
-          form(action='#')
+          .planType.patientFields
             .form-group
               label(for='enroll') Enrollment Date
-              input.form-control(type='text' id='enroll' name='enroll')
-            .form-group
-              label(for='disenroll') Disenrollment Date
-              input.form-control(type='text' id='disenroll' name='disenroll') 
-            button.btn.btn-primary(id='continue-planInfo') Continue
+              input.form-control(type='date' id='enroll' name='enroll')
+            button.btn.btn-primary(type='button' id='continue-planInfo') Continue
         
-        .healthIssues.patientFields
-          form(action='#')
-            .checkbox  
-              label
-                input(type='checkbox' id='dia' class='health'
-                name="diabetes" value="value")
-                | Diabetes
-            .checkbox    
-              label 
-                input(type="checkbox", id='osteo' class='health' name="osteoporosis" value="value")
-                |Osteporosis
-            .checkbox    
-              label(for='cancer')
-                input(type="checkbox", id='cancer' class='health'
-                name="cancer" value="value")
-                |Cancer
-            .checkbox
-              label(for='copd')              
-                input(type='checkbox', id='copd' class='health'
-                name='copd' value='value')
-                |COPD
-            .checkbox    
-              label(for='esrd')
-                input(type='checkbox', id='esrd' class='health'
-                name='copd' value='value')
-                |ESRD  
-            .checkbox
-              label(for='heart')
-                input(type='checkbox', id='heart', class='health'
-                name='heart' value='value')
-                |Heart Attack
-            .checkbox
-              label(for='fracture')    
-                input(type='checkbox' id='fracture' class='fracture'
-                name='fracture' value='value')
-                |Fracture
-                
-            button.btn.btn-default.col-xs-6(type='submit') Submit  
+          .healthIssues.patientFields
+            h2 Patient Conditions
+            .form-group
+              .checkbox  
+                label
+                  input(type='checkbox' id='dia' class='health'
+                  name="diabetes")
+                  | Diabetes
+              .checkbox    
+                label 
+                  input.bigBox(type="checkbox", id='osteo' class='health' name="osteoporosis")
+                  |Osteporosis
+              .checkbox    
+                label(for='cancer')
+                  input(type="checkbox", id='cancer' class='health'
+                  name="cancer" )
+                  |Cancer
+              .checkbox
+                label(for='copd')              
+                  input(type='checkbox', id='copd' class='health'
+                  name='copd')
+                  |COPD
+              .checkbox    
+                label(for='esrd')
+                  input(type='checkbox', id='esrd' class='health'
+                  name='esrd')
+                  |ESRD  
+              .checkbox
+                label(for='heart')
+                  input(type='checkbox', id='heart', class='health'
+                  name='heart')
+                  |Heart Attack
+              .checkbox
+                label(for='fracture')    
+                  input(type='checkbox' id='fracture' class='fracture'
+                  name='fracture')
+                  |Fracture
+            .form-group  
+              button.btn.btn-default.btn-primary.col-xs-6(type='submit') Submit
