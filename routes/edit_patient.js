@@ -18,7 +18,7 @@ router.get('/', function(req, res, next) {
   });
 
 router.put('/:id', (req, res, next)=> {
-  const people = mods.patients().update({
+  mods.patients().update({
     last: req.body.last,
     first: req.body.first,
     gender: req.body.gender,
@@ -33,8 +33,8 @@ router.put('/:id', (req, res, next)=> {
     esrd: req.body.esrd,
     heart: req.body.heart,
     fracture: req.body.fracture
-  }).where({ id : req.params.id });
-  const actions = mods.measures().update({
+  }).where({ id : req.params.id }).then((patient) => {
+    mods.measures().update({
       initial_hra: req.body.initHRA,
       recent_hra: req.body.recentHRA,
       initial_icp: req.body.initICP,
@@ -45,9 +45,9 @@ router.put('/:id', (req, res, next)=> {
       c12_osteoporosis: req.body.C12Osteo,
       c13_betus_eyecare: req.body.C13BetusEye,
       c14_betus_kidneycare: req.body.C14BetusKidney
-    }).where({ paitent_id: req.parems.id });
-  Promise.all([people, actions]).then(() => {
-    res.redirect('landing', { patient: both[0], measure: both[1] });
+    }).where({ paitent_id: patient.id }).then(() => {
+      res.redirect('landing');
+    });
   });
 });
 
