@@ -52,7 +52,9 @@ router.put('/:id', (req, res, next)=> {
 });
 
 router.delete('/:id', (req, res, next) => {
-  mods.patients().delete().where({ id: req.params.id }).then(()=> {
+  const people = mods.patients().delete().where({ id: req.params.id });
+  const actions = mods.measures().delete().where({ patient_id: req.params.id})
+  Promise.all([people, actions]).then(()=> {
     res.redirect('landing');
   });
 });
