@@ -1,13 +1,4 @@
 const knex = require('./knex');
-var thirtyDays = new Date();
-    thirtyDays.setDate(thirtyDays.getDate()-30);
-var sixtyDays = new Date();
-    sixtyDays.setDate(sixtyDays.getDate()-60);
-var ninetyDays = new Date();
-    ninetyDays.setDate(ninetyDays.getDate()-90);
-var yearAgo = new Date();
-    yearAgo.setDate(yearAgo.getDate()-365);
-
 
 var pgFormatDate = function(date)  {
   function zeroPad(d) {
@@ -17,18 +8,6 @@ var pgFormatDate = function(date)  {
   var parsed = new Date(date)
 
   return [parsed.getUTCFullYear(), zeroPad(parsed.getMonth() + 1), zeroPad(parsed.getDate())].join('');
-};
-
-var newEnrollees = function(data) {
-  var newEnrollee = [];
-  var oldEnrollee = [];
-  for (var i = 0; i < data.length; i++) {
-    if (data[i].enrollment > yearAgo) {
-      newEnrollee.push(data[i]);
-    } else {
-      oldEnrollee.push(data[i]);
-    }
-  }
 };
 
 module.exports = {
@@ -63,5 +42,5 @@ module.exports = {
    measures: function measures() {
      return knex('measures');
    }
-   
+
  }
