@@ -5,7 +5,8 @@ const knex = require('../db/knex.js');
 const Modules = require('../db/modules.js');
 
 router.get('/', function(req, res, next) {
-  res.render('login', { title: 'Express' });
+  console.log('got in here');
+  res.render('index')
 });
 
 

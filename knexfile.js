@@ -2,7 +2,7 @@ module.exports = {
 
   development: {
     client: 'postgresql',
-    connection: 'postgres://localhost/SNP_OMT',
+    connection: 'postgres://localhost/snp_omt',
     debug: true
   },
 

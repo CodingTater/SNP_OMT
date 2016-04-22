@@ -3,15 +3,22 @@ const router = express.Router();
 const knex = require('../db/knex');
 const Modules = require('../db/modules');
 
-router.get('/', function(req, res, next) {
-  if(req.user) {
-        res.render('landing', { company: "SNP" });
-  } else {
-    res.redirect('/login', { error: "You need to validate through LinkedIn" });
+const ensureLoggedIn = (req, res, next) => {
+  if (req.user) {
+    console.log('checked user');
+    next();
   }
+  else {
+    console.log('redirecting');
+    res.redirect('/');
+  }
+}
+
+router.get('/', ensureLoggedIn, (req, res, next) => {
+  res.render('landing');
 });
 
-router.post('/', (req, res, next)=> {
+router.post('/', ensureLoggedIn, (req, res, next)=> {
 
     res.render('edit')
   })
