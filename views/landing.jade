@@ -9,9 +9,10 @@ block content
         h3 
           a(href='/landing') Home
         h3  
-          a(href='#') Reports
+          a(href='/reports') Reports
         h3
-          a(href='#') Logout
+          a(href='/') Logout
+
         div.userInfo
           img(src=user.photo width='60px')
           p #{user.name}
@@ -20,10 +21,10 @@ block content
         p.icon 
           i(class="fa fa-users" aria-hidden="true")
         p.landingDivText Add new patient data or Access Existing Patient Data
-        p.landingDivText #{error}
+        p.landingDivText.error #{error}
         a.btn.btn-primary.center-block.addNewButton(href="/add_patient" role="button" style="width:70%") Add New Patient
         form(action="/edit_patient", method="get")
-          input(type="text" name="patientId" placeholder="enter patient ID")
+          input.center-block(type="text" name="patientId" placeholder="enter patient ID" style='width:50%; margin-bottom: 20px')
           button.btn.btn-primary.center-block(type="submit" style="width:70%") Edit Existing Patient
       div.landingDiv
         p.icon

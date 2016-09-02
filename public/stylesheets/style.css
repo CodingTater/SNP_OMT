@@ -174,10 +174,17 @@ header{
   justify-content: center;
   align-items: flex-start;
   width: 35%;
-  height: 87%;
+  height: 95%;
   padding-left: 5%;
   border: 2px solid grey;
   border-radius: 10px;
+  position: relative;
+}
+
+.delete {
+  position: absolute;
+  top: 120px;
+  right: 60px;
 }
 
 .pane h1 {
@@ -423,4 +430,8 @@ footer{
 
 .male{
   margin-right: 100px;
+}
+
+.error {
+  color: red;
 }

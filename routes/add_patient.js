@@ -28,9 +28,19 @@ router.post('/', (req, res, next)=> {
     fracture: req.body.fracture
   }, '*').then((person)=> {
     Modules.measures().insert({
-      patient_id: JSON.stringify(person[0].id)
+      patient_id: JSON.stringify(person[0].id),
+      initial_hra: null,
+      recent_hra: null,
+      initial_icp: null,
+      recent_icp: null,
+      c01_breast: null,
+      c02_cancer: null,
+      c03_flu_vac: null,
+      c12_osteoporosis: null,
+      c13_betus_eyecare: null,
+      c14_betus_kidneycare: null
     }).then(()=> {
-      res.redirect('landing', { company: "Fortified Health" });
+      res.redirect('/landing');
     })
   });
 });
